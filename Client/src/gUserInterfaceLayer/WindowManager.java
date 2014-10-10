@@ -2,6 +2,7 @@ package gUserInterfaceLayer;
 
 import java.util.Random;
 
+import networkLayer.Client;
 import authorizationLayer.*;
 import messengerLayer.*;
 
@@ -9,13 +10,15 @@ public class WindowManager {
 
 	private Messenger messenger;
 	private AuthorizationManager authorizator;
+	private Client client;
 
 	public WindowManager() {
 		// Здесь должна проиходить подготовка к инициализации гуёв и должны
 		// инициализироваться остальные слои - их методы будут дёргаться в
 		// зависимости от юзер-инпута (см. ниже)
-		messenger = new Messenger();
-		authorizator = new AuthorizationManager();
+		client = new Client();
+		messenger = new Messenger(client);
+		authorizator = new AuthorizationManager(client);
 
 	}
 
