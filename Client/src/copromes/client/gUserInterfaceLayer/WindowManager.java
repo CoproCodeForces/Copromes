@@ -1,24 +1,23 @@
 package copromes.client.gUserInterfaceLayer;
 
-import java.util.Random;
-
 import copromes.client.authorizationLayer.*;
-import copromes.client.contactsLayer.contactsManager;
+import copromes.client.contactsLayer.ContactsManager;
 import copromes.client.messengerLayer.*;
-
 
 public class WindowManager {
 
-	private Messenger messenger;
+	private Messenger messengerManager;
 	private AuthorizationManager authManager;
-	private contactsManager contactsManager;
+	private ContactsManager contactsManager;
 
-	public WindowManager() {
+	public WindowManager(Messenger messengerManager,
+			AuthorizationManager authManager, ContactsManager contactsManager) {
 		// Здесь должна проиходить подготовка к инициализации гуёв и должны
 		// инициализироваться остальные слои - их методы будут дёргаться в
 		// зависимости от юзер-инпута (см. ниже)
-		messenger = new Messenger(null);
-		authManager = new AuthorizationManager(null);
+		this.messengerManager = messengerManager;
+		this.authManager = authManager;
+		this.contactsManager = contactsManager;
 
 	}
 

@@ -1,7 +1,7 @@
 package copromes.client.initializationLayer;
 
 import copromes.client.authorizationLayer.AuthorizationManager;
-import copromes.client.contactsLayer.contactsManager;
+import copromes.client.contactsLayer.ContactsManager;
 import copromes.client.gUserInterfaceLayer.*;
 import copromes.client.messengerLayer.Messenger;
 import copromes.client.networkLayer.Client;
@@ -22,7 +22,7 @@ public class Main {
 			Client client = new Client(serverPort, host);
 			client.setInterfaces();
 			AuthorizationManager authManager = new AuthorizationManager(client);
-			contactsManager contactsManager = new contactsManager(client);
+			ContactsManager contactsManager = new ContactsManager(client);
 			Messenger messenger = new Messenger(client);
 			ResponseHandler responseHandler = new ResponseHandler(clientPort);
 			responseHandler.setupClientHost();

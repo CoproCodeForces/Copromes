@@ -6,10 +6,10 @@ import copromes.client.networkLayer.Client;
 import copromes.commonInterfaces.IContactsManager;
 import copromes.domainLayer.User;
 
-public class contactsManager implements IContactsManager {
+public class ContactsManager implements IContactsManager {
 	private Client client;
 	
-	public contactsManager(Client client) {
+	public ContactsManager(Client client) {
 		this.client = client;
 	}
 
