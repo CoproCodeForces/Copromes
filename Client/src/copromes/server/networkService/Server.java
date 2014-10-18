@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import copromes.commonInterfaces.*;
 import copromes.server.authorizationService.AuthorizationManager;
@@ -13,33 +15,42 @@ import copromes.server.messengerService.MessengerManager;
 public class Server {
 
 	private Registry registry;
-	private int port;
-	private IAuthorizationManager authManager;
-	private IContactsManager contactsManager;
-	private IMessengerManager messengerManager;
-
-	public Server(int port, AuthorizationManager authManager,
-			ContactsManager contactsManager, MessengerManager messengerManager) {
+	private int port;	
+	public List<Client> clients;
+	
+	public Server(int port) throws RemoteException {
 		this.port = port;
-		this.authManager = authManager;
-		this.contactsManager = contactsManager;
-		this.messengerManager = messengerManager;
+		registry = LocateRegistry.createRegistry(port);
+		clients = new ArrayList<Client>();
 	}
 
-	public void setupServer() {
+	public void setupAuthManager(AuthorizationManager authManager) {
 		try {
-			registry = LocateRegistry.createRegistry(port);
-			
 			IAuthorizationManager authStub = (IAuthorizationManager) UnicastRemoteObject
 					.exportObject(authManager, port);
+			registry.rebind("authorizationService", authStub);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setupContactsManager(ContactsManager contactsManager) {
+		try {
 			IContactsManager contactsStub = (IContactsManager) UnicastRemoteObject
 					.exportObject(contactsManager, port);
+			registry.rebind("contactsService", contactsStub);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void setupMessengerManager(MessengerManager messengerManager) {
+		try {
 			IMessengerManager messengerStub = (IMessengerManager) UnicastRemoteObject
 					.exportObject(messengerManager, port);
-			
-			registry.rebind("authorizationService", authStub);
-			registry.rebind("contactsService", contactsStub);
-			registry.rebind("messengerSerivce", messengerStub);
+			registry.rebind("messengerService", messengerStub);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

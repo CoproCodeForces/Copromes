@@ -3,11 +3,20 @@ package copromes.server.authorizationService;
 import copromes.commonInterfaces.IAuthorizationManager;
 import copromes.commonInterfaces.RegistrationException;
 import copromes.domainLayer.User;
+import copromes.server.databaseService.DatabaseManager;
+import copromes.server.networkService.Server;
 
 public class AuthorizationManager implements IAuthorizationManager {
 
-	public AuthorizationManager() {
+	private Server server;
+	private DatabaseManager dbManager;
+	
+	public AuthorizationManager(Server server, DatabaseManager dbManager) {
 		super();
+		this.server = server;
+		this.server.setupAuthManager(this);
+		
+		this.dbManager = dbManager;
 	}
 	
 	@Override

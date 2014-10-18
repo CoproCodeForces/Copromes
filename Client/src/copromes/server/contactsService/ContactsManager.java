@@ -4,11 +4,20 @@ import java.util.List;
 
 import copromes.commonInterfaces.IContactsManager;
 import copromes.domainLayer.User;
+import copromes.server.databaseService.DatabaseManager;
+import copromes.server.networkService.Server;
 
 public class ContactsManager implements IContactsManager {
 
-	public ContactsManager() {
+	private Server server;
+	private DatabaseManager dbManager;
+	
+	public ContactsManager(Server server, DatabaseManager dbManager) {
 		super();
+		this.server = server;
+		this.server.setupContactsManager(this);
+		
+		this.dbManager = dbManager;
 	}
 	
 	@Override
