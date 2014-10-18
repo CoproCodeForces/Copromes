@@ -7,20 +7,20 @@ import copromes.domainLayer.User;
 
 public class AuthorizationManager implements IAuthorizationManager {
 
-	private Client сlient;
+	private Client client;
 
 	public AuthorizationManager(Client client) {
-		this.сlient = client;
+		this.client = client;
 	}
 
 	@Override
 	public User doLogin(String name, String passwordHash) {
-		return сlient.authManager.doLogin(name, passwordHash);
+		return client.authManager.doLogin(name, passwordHash);
 	}
 
 	@Override
 	public void doLogout(User user) {
-		сlient.authManager.doLogout(user);
+		client.authManager.doLogout(user);
 
 	}
 
@@ -28,7 +28,7 @@ public class AuthorizationManager implements IAuthorizationManager {
 	public User registerUser(String login, String passwordHash,
 			String passwordConfirmationHash, String name, String Bio)
 			throws RegistrationException {
-		return сlient.authManager.registerUser(login, passwordHash, passwordConfirmationHash, name, Bio);
+		return client.authManager.registerUser(login, passwordHash, passwordConfirmationHash, name, Bio);
 	}
 
 }
