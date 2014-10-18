@@ -1,13 +1,23 @@
 package copromes.server.authorizationService;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.server.RemoteServer;
+import java.rmi.server.ServerNotActiveException;
+
 import copromes.commonInterfaces.IAuthorizationManager;
 import copromes.commonInterfaces.RegistrationException;
 import copromes.domainLayer.User;
 import copromes.server.databaseService.DatabaseManager;
+import copromes.server.networkService.Client;
 import copromes.server.networkService.Server;
 
-public class AuthorizationManager implements IAuthorizationManager {
+public class AuthorizationManager extends RemoteServer implements IAuthorizationManager {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Server server;
 	private DatabaseManager dbManager;
 	
@@ -22,6 +32,20 @@ public class AuthorizationManager implements IAuthorizationManager {
 	@Override
 	public User doLogin(String name, String passwordHash) {
 		// TODO Auto-generated method stub
+		try {
+			User user = dbManager.doLogin(name, passwordHash);
+			Client client = new Client(user, getClientHost());
+			server.clients.add(client);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServerNotActiveException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
