@@ -5,7 +5,7 @@ import java.rmi.Remote;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
-public interface IClientInterfaces extends Remote{
+public interface IServerResponseManager extends Remote{
 	
 	String sendMessage(User user, Message message);
 	void isConnected();
