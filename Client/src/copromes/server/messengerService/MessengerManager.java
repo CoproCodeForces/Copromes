@@ -1,6 +1,7 @@
 package copromes.server.messengerService;
 
 import copromes.commonInterfaces.IMessengerManager;
+import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.server.databaseService.DatabaseManager;
 import copromes.server.networkService.Server;
@@ -19,7 +20,7 @@ public class MessengerManager implements IMessengerManager {
 	}
 
 	@Override
-	public Message sendMessage(String message) {
+	public Message sendMessage(String message, ChatRoom chatRoom) {
 		// TODO Auto-generated method stub
 		return null;
 	}

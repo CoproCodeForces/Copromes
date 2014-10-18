@@ -6,6 +6,7 @@ import copromes.commonInterfaces.IAuthorizationManager;
 import copromes.commonInterfaces.IContactsManager;
 import copromes.commonInterfaces.IMessengerManager;
 import copromes.commonInterfaces.RegistrationException;
+import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
@@ -60,7 +61,7 @@ public class DatabaseManager implements IAuthorizationManager, IContactsManager,
 	}
 
 	@Override
-	public Message sendMessage(String message) {
+	public Message sendMessage(String message, ChatRoom chatRoom) {
 		// TODO Auto-generated method stub
 		return null;
 	}
