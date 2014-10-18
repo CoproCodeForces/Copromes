@@ -6,6 +6,7 @@ import copromes.commonInterfaces.IAuthorizationManager;
 import copromes.commonInterfaces.IContactsManager;
 import copromes.commonInterfaces.IMessengerManager;
 import copromes.commonInterfaces.RegistrationException;
+import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
 public class DatabaseManager implements IAuthorizationManager, IContactsManager, IMessengerManager {
@@ -54,6 +55,12 @@ public class DatabaseManager implements IAuthorizationManager, IContactsManager,
 	public User registerUser(String login, String passwordHash,
 			String passwordConfirmationHash, String name, String Bio)
 			throws RegistrationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Message sendMessage(String message) {
 		// TODO Auto-generated method stub
 		return null;
 	}

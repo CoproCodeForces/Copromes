@@ -7,6 +7,6 @@ import copromes.domainLayer.User;
 
 public interface IServerResponseManager extends Remote{
 	
-	String sendMessage(User user, Message message);
+	void recieveMessage(User user, Message message);
 	void isConnected();
 }

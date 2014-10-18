@@ -1,4 +1,4 @@
-package copromes.client.serverResponceHandler;
+package copromes.client.serverResponseHandler;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

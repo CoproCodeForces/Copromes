@@ -5,7 +5,7 @@ import copromes.client.contactsLayer.contactsManager;
 import copromes.client.gUserInterfaceLayer.*;
 import copromes.client.messengerLayer.Messenger;
 import copromes.client.networkLayer.Client;
-import copromes.client.serverResponceHandler.ResponseHandler;
+import copromes.client.serverResponseHandler.ResponseHandler;
 
 //Стоит подумать над именем базового класса
 public class Main {
