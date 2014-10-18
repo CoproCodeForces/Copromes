@@ -1,15 +1,34 @@
 package copromes.client.authorizationLayer;
 
-public class AuthorizationManager {
+import copromes.client.networkLayer.Client;
+import copromes.commonInterfaces.IAuthorizationManager;
+import copromes.commonInterfaces.RegistrationException;
+import copromes.domainLayer.User;
 
-	public void authorize(Object eventData) {
-		// TODO Auto-generated method stub
-		
+public class AuthorizationManager implements IAuthorizationManager {
+
+	private Client сlient;
+
+	public AuthorizationManager(Client client) {
+		this.сlient = client;
 	}
 
-	public void register(Object eventData) {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public User doLogin(String name, String passwordHash) {
+		return сlient.authManager.doLogin(name, passwordHash);
+	}
+
+	@Override
+	public void doLogout(User user) {
+		сlient.authManager.doLogout(user);
+
+	}
+
+	@Override
+	public User registerUser(String login, String passwordHash,
+			String passwordConfirmationHash, String name, String Bio)
+			throws RegistrationException {
+		return сlient.authManager.registerUser(login, passwordHash, passwordConfirmationHash, name, Bio);
 	}
 
 }

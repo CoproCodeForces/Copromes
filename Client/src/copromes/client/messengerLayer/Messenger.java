@@ -1,10 +1,11 @@
 package copromes.client.messengerLayer;
 
-public class Messenger {
+import copromes.client.networkLayer.Client;
+import copromes.commonInterfaces.IMessengerManager;
 
-	public void sendMessage(Object eventData) {
-		// TODO Auto-generated method stub
-		
+public class Messenger implements IMessengerManager {
+	private Client client;
+	public Messenger(Client client){
+		this.client = client;
 	}
-
 }

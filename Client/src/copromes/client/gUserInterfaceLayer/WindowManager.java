@@ -3,20 +3,22 @@ package copromes.client.gUserInterfaceLayer;
 import java.util.Random;
 
 import copromes.client.authorizationLayer.*;
+import copromes.client.contactsLayer.contactsManager;
 import copromes.client.messengerLayer.*;
 
 
 public class WindowManager {
 
 	private Messenger messenger;
-	private AuthorizationManager authorizator;
+	private AuthorizationManager authManager;
+	private contactsManager contactsManager;
 
 	public WindowManager() {
 		// Здесь должна проиходить подготовка к инициализации гуёв и должны
 		// инициализироваться остальные слои - их методы будут дёргаться в
 		// зависимости от юзер-инпута (см. ниже)
-		messenger = new Messenger();
-		authorizator = new AuthorizationManager();
+		messenger = new Messenger(null);
+		authManager = new AuthorizationManager(null);
 
 	}
 
@@ -41,24 +43,6 @@ public class WindowManager {
 
 		int eventType;
 		Object eventData = null;
-
-		while (3 < 5) {
-			eventType = new Random().nextInt(5);
-
-			switch (eventType) {
-			case 1:
-				authorizator.authorize(eventData);
-				break;
-			case 2:
-				authorizator.register(eventData);
-				break;
-			case 3:
-				messenger.sendMessage(eventData);
-				break;
-			default:
-				break;
-			}
-		}
 
 		// Повторюсь, что это даже не заготовка, а всего лишь псевдозаготовка -
 		// нужно не просто посылать эти запросы другим слоям, но и обрабатывать
