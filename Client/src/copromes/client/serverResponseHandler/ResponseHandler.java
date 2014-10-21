@@ -22,7 +22,7 @@ public class ResponseHandler implements IServerResponseManager {
 		try {
 			IServerResponseManager servStub = (IServerResponseManager) UnicastRemoteObject
 					.exportObject(this, port);
-			registry.rebind("serverResponceManager", servStub);
+			registry.rebind("serverResponseManager", servStub);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

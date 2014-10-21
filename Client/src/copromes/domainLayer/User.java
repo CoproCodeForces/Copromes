@@ -1,11 +1,12 @@
 package copromes.domainLayer;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 //import java.sql.*;
 
-public class User {
+public class User implements Serializable {
 
 	private int id;
 	private String login;

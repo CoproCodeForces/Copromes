@@ -65,4 +65,28 @@ public class DatabaseManager implements IAuthorizationManager, IContactsManager,
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ChatRoom createChatRoom(User user, String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ChatRoom addUserToChatRoom(User user, ChatRoom chatRoom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ChatRoom deleteUserFromChatRoom(User user, ChatRoom chatRoom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteChatRoom(ChatRoom chatRoom) {
+		// TODO Auto-generated method stub
+		
+	}
 }

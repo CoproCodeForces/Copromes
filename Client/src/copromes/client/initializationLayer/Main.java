@@ -7,36 +7,34 @@ import copromes.client.messengerLayer.Messenger;
 import copromes.client.networkLayer.Client;
 import copromes.client.serverResponseHandler.ResponseHandler;
 
-//Стоит подумать над именем базового класса
 public class Main {
 
 	private final static int serverPort = 7331;
 	private final static int clientPort = 13337;
 	private final static String host = "192.168.0.0";
-
-	/**
-	 * @param args
-	 */
+	
 	public static void main(String[] args) {
 		try {
-			Client client = new Client(serverPort, host);
-			client.setInterfaces();
+			// Initializing access to server host
+			//Client client = new Client(serverPort, host);
+			Client client = null;
+			// Accessing server remote interfaces 
+			//client.setInterfaces();
+			
+			// Initializing local managers for GUI events handling
 			AuthorizationManager authManager = new AuthorizationManager(client);
 			ContactsManager contactsManager = new ContactsManager(client);
 			Messenger messenger = new Messenger(client);
+
+			// Initializing local manager for server event handling
 			ResponseHandler responseHandler = new ResponseHandler(clientPort);
 			responseHandler.setupClientHost();
+
+			// Initializing GUI;
+			WindowManager windowManager = new WindowManager(messenger,
+					authManager, contactsManager);
+			windowManager.start();
 		} catch (Exception e) {
 		}
-
-		// Инициализируем гуи: пока не знаю, что там должно быть
-		WindowManager windowManager = new WindowManager();
-		windowManager.start();
-
-		// Сейчас осознал, что вместо WindowManager должен быть интерфейс,
-		// который сначала будет реализовывать
-		// какой-нибудь ConsoleManager, а затем и WindowManager. Кто-нибудь,
-		// поменяйте плиз потом
-
 	}
 }
