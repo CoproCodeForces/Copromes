@@ -24,7 +24,7 @@ public class WindowManager {
 	}
 
 	private void initialize() {
-		WelcomeWindow welcomeWindow = new WelcomeWindow();
+		LoginWindow welcomeWindow = new LoginWindow();
 	}
 
 	private void startListening() {
