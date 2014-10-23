@@ -42,7 +42,7 @@ public class LoginWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		JPanel backgroundPanel = new JPanel(new GridBagLayout());
+		JPanel backgroundPanel = new JPanel(new GridLayout(rowsNumber, columnsNumber));
 		backgroundPanel.setBackground(new Color(255, 255, 255));
 		backgroundPanel.setBorder(new EmptyBorder(new Insets(topPadding,
 				leftPadding, bottomPadding, rightPadding)));
@@ -71,15 +71,14 @@ public class LoginWindow extends JFrame {
 		backgroundPanel.add(passwordPanel);
 		
 		JButton loginButton = new JButton("DO LOGIN");
-		//loginButton.setPreferredSize(new Dimension(100, 20));
 		backgroundPanel.add(loginButton);
 		
 		JButton registerButton = new JButton("FREE REGISTRATION");
-		//registerButton.setPreferredSize(new Dimension(25, 20));
+		
 		backgroundPanel.add(registerButton);
 		
 		JButton exitButton = new JButton("EXIT");
-		//exitButton.setPreferredSize(new Dimension(50, 20));
+		
 		backgroundPanel.add(exitButton);
 		
 		add(backgroundPanel);
