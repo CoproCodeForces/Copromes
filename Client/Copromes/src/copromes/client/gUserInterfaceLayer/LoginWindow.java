@@ -3,6 +3,7 @@ package copromes.client.gUserInterfaceLayer;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Label;
@@ -41,8 +42,7 @@ public class LoginWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		JPanel backgroundPanel = new JPanel(new GridLayout(rowsNumber,
-				columnsNumber, horizontalGap, verticalGap));
+		JPanel backgroundPanel = new JPanel(new GridBagLayout());
 		backgroundPanel.setBackground(new Color(255, 255, 255));
 		backgroundPanel.setBorder(new EmptyBorder(new Insets(topPadding,
 				leftPadding, bottomPadding, rightPadding)));
@@ -71,19 +71,19 @@ public class LoginWindow extends JFrame {
 		backgroundPanel.add(passwordPanel);
 		
 		JButton loginButton = new JButton("DO LOGIN");
-		loginButton.setSize(100, 20);
+		//loginButton.setPreferredSize(new Dimension(100, 20));
 		backgroundPanel.add(loginButton);
 		
 		JButton registerButton = new JButton("FREE REGISTRATION");
-		registerButton.setSize(100, 20);
+		//registerButton.setPreferredSize(new Dimension(25, 20));
 		backgroundPanel.add(registerButton);
 		
 		JButton exitButton = new JButton("EXIT");
-		exitButton.setSize(100, 20);
+		//exitButton.setPreferredSize(new Dimension(50, 20));
 		backgroundPanel.add(exitButton);
 		
 		add(backgroundPanel);
-
+		pack();
 		setVisible(true);
 	}
 
