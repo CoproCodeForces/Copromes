@@ -11,15 +11,17 @@ public class Main {
 
 	private final static int serverPort = 7331;
 	private final static int clientPort = 13337;
-	private final static String host = "192.168.0.0";
+	private final static String host = "137.228.73.13";
 	
 	public static void main(String[] args) {
-		try {
-			// Initializing access to server host
-			//Client client = new Client(serverPort, host);
-			Client client = null;
+		
+		WindowManager windowManager = new WindowManager(); 
+		
+		try {			
+			// Initializing access to server host			
+			Client client = new Client(serverPort, host);			
 			// Accessing server remote interfaces 
-			//client.setInterfaces();
+			client.setInterfaces();
 			
 			// Initializing local managers for GUI events handling
 			AuthorizationManager authManager = new AuthorizationManager(client);
@@ -31,10 +33,11 @@ public class Main {
 			responseHandler.setupClientHost();
 
 			// Initializing GUI;
-			WindowManager windowManager = new WindowManager(messenger,
+			windowManager = new WindowManager(messenger,
 					authManager, contactsManager);
 			windowManager.start();
 		} catch (Exception e) {
+			windowManager.showError(e.getMessage());		
 		}
 	}
 }
