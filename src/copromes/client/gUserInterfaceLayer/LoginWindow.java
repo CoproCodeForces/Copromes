@@ -43,17 +43,9 @@ public class LoginWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-<<<<<<< HEAD
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 80, 0, 10);
-=======
-		JPanel backgroundPanel = new JPanel(new GridLayout(rowsNumber, columnsNumber));
-		backgroundPanel.setBackground(new Color(255, 255, 255));
-		backgroundPanel.setBorder(new EmptyBorder(new Insets(topPadding,
-				leftPadding, bottomPadding, rightPadding)));
-
->>>>>>> 4bcab4a3908944f5604e938042c24bf189b8d0b7
 		JLabel titleLabel = new JLabel("AUTHORIZATION");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
@@ -102,7 +94,6 @@ public class LoginWindow extends JFrame {
 		panel.add(passwordInput, c);
 
 		JButton loginButton = new JButton("DO LOGIN");
-<<<<<<< HEAD
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -127,19 +118,6 @@ public class LoginWindow extends JFrame {
 		panel.add(exitButton, c);
 
 		add(panel);
-=======
-		backgroundPanel.add(loginButton);
-		
-		JButton registerButton = new JButton("FREE REGISTRATION");
-		
-		backgroundPanel.add(registerButton);
-		
-		JButton exitButton = new JButton("EXIT");
-		
-		backgroundPanel.add(exitButton);
-		
-		add(backgroundPanel);
->>>>>>> 4bcab4a3908944f5604e938042c24bf189b8d0b7
 		pack();
 		setVisible(true);
 	}
