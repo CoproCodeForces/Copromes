@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -20,19 +23,20 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class LoginWindow extends JFrame {
+import copromes.client.authorizationLayer.AuthorizationManager;
 
-	private final int rowsNumber = 6;
-	private final int columnsNumber = 1;
-	private final int horizontalGap = 10;
-	private final int verticalGap = 5;
+public class LoginWindow extends JFrame implements ActionListener {
 
-	private final int topPadding = 15;
-	private final int leftPadding = 40;
-	private final int bottomPadding = 15;
-	private final int rightPadding = 40;
-
-	public LoginWindow() {
+	private AuthorizationManager authManager;
+	
+	private JLabel titleLabel;
+	private JButton loginButton;
+	private JButton registerButton;
+	private JTextField loginInput;
+	private JPasswordField passwordInput;
+	
+	public LoginWindow(AuthorizationManager authManager) {
+		this.authManager = authManager;
 		initUI();
 	}
 
@@ -45,18 +49,18 @@ public class LoginWindow extends JFrame {
 
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		c.insets = new Insets(10, 80, 0, 10);
-		JLabel titleLabel = new JLabel("AUTHORIZATION");
+		c.insets = new Insets(10, 10, 0, 10);
+
+
+		titleLabel = new JLabel("AUTHORIZATION");
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 0;
 		c.weightx = 0;
-		c.gridwidth = 2;
-//		titleLabel.setBorder(new EmptyBorder(0, 30, 0, 0));
+		c.gridwidth = 1;
+		// titleLabel.setBorder(new EmptyBorder(0, 30, 0, 0));
 		panel.add(titleLabel, c);
 
-		c.insets = new Insets(10, 10, 0, 10);
-		
 		JLabel loginLabel = new JLabel("LOGIN");
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
@@ -66,7 +70,7 @@ public class LoginWindow extends JFrame {
 		loginLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
 		panel.add(loginLabel, c);
 
-		JTextField loginInput = new JTextField(10);
+		loginInput = new JTextField(15);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
@@ -84,7 +88,7 @@ public class LoginWindow extends JFrame {
 		c.gridwidth = 1;
 		panel.add(passwordLabel, c);
 
-		JPasswordField passwordInput = new JPasswordField(10);
+		passwordInput = new JPasswordField(15);
 		passwordInput.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
@@ -93,33 +97,56 @@ public class LoginWindow extends JFrame {
 		c.gridwidth = 1;
 		panel.add(passwordInput, c);
 
-		JButton loginButton = new JButton("DO LOGIN");
+		loginButton = new JButton("DO LOGIN");
+		loginButton.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(10, 100, 0, -100);
 		c.gridx = 0;
 		c.gridy = 3;
-		c.weightx = 0;
+		c.weightx = 0.5;
 		c.gridwidth = 1;
 		panel.add(loginButton, c);
 
-		JButton registerButton = new JButton("FREE REGISTRATION");
+		registerButton = new JButton("FREE REGISTRATION");
+		registerButton.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
+		c.insets = new Insets(10, -40, 0, 50);
+		c.gridx = 1;
 		c.gridy = 4;
-		c.weightx = 0;
-		c.gridwidth = 2;
+		c.weightx = 0;	
+		c.gridwidth = 0;
 		panel.add(registerButton, c);
 
 		JButton exitButton = new JButton("EXIT");
+		exitButton.addActionListener(this);
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(10, 100, 0, -100);
 		c.gridx = 0;
 		c.gridy = 5;
 		c.weightx = 0;
-		c.gridwidth = 2;
+		c.gridwidth = 1;
 		panel.add(exitButton, c);
-
+		
+		
 		add(panel);
 		pack();
 		setVisible(true);
 	}
-
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object eventSource = e.getSource();
+		if (eventSource == loginButton) {
+			try {
+				authManager.doLogin(loginInput.getText(), passwordInput.getPassword());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else if (eventSource == registerButton) {
+			titleLabel.setText("Not login button clicked");
+		} else {
+			System.exit(0);
+		}
+	}
 }

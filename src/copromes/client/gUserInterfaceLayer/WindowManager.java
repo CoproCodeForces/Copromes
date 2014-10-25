@@ -30,7 +30,7 @@ public class WindowManager {
 	}
 
 	private void initialize() {
-		LoginWindow welcomeWindow = new LoginWindow();
+		LoginWindow welcomeWindow = new LoginWindow(authManager);
 	}
 
 	private void startListening() {
