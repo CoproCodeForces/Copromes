@@ -4,20 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 
-import copromes.client.networkLayer.Client;
+import copromes.client.networkLayer.Server;
 import copromes.commonInterfaces.IAuthorizationManager;
+import copromes.commonInterfaces.InvalidLoginException;
 import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.User;
 
 public class AuthorizationManager {
 
-	private Client client;
+	private Server client;
 
-	public AuthorizationManager(Client client) {
+	public AuthorizationManager(Server client) {
 		this.client = client;
 	}
 	
-	public User doLogin(String name, char[] passwordHash) throws RemoteException {
+	public User doLogin(String name, char[] passwordHash) throws RemoteException, InvalidLoginException {
 		return client.authManager.doLogin(name, String.valueOf(passwordHash));
 	}
 

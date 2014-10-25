@@ -1,15 +1,15 @@
 package copromes.client.messengerLayer;
 
-import copromes.client.networkLayer.Client;
+import copromes.client.networkLayer.Server;
 import copromes.commonInterfaces.IMessengerManager;
 import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
 public class Messenger implements IMessengerManager {
-	private Client client;
+	private Server client;
 
-	public Messenger(Client client) {
+	public Messenger(Server client) {
 		this.client = client;
 	}
 

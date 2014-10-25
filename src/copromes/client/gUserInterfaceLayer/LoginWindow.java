@@ -16,6 +16,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -24,19 +25,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import copromes.client.authorizationLayer.AuthorizationManager;
+import copromes.commonInterfaces.InvalidLoginException;
 
 public class LoginWindow extends JFrame implements ActionListener {
 
-	private AuthorizationManager authManager;
-	
+	private WindowManager windowManager;
+
 	private JLabel titleLabel;
 	private JButton loginButton;
 	private JButton registerButton;
 	private JTextField loginInput;
 	private JPasswordField passwordInput;
-	
-	public LoginWindow(AuthorizationManager authManager) {
-		this.authManager = authManager;
+
+	public LoginWindow(WindowManager windowManager) {
+		this.windowManager = windowManager;
 		initUI();
 	}
 
@@ -50,7 +52,6 @@ public class LoginWindow extends JFrame implements ActionListener {
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 0, 10);
-
 
 		titleLabel = new JLabel("AUTHORIZATION");
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -113,7 +114,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 		c.insets = new Insets(10, -40, 0, 50);
 		c.gridx = 1;
 		c.gridy = 4;
-		c.weightx = 0;	
+		c.weightx = 0;
 		c.gridwidth = 0;
 		panel.add(registerButton, c);
 
@@ -126,25 +127,29 @@ public class LoginWindow extends JFrame implements ActionListener {
 		c.weightx = 0;
 		c.gridwidth = 1;
 		panel.add(exitButton, c);
-		
-		
+
 		add(panel);
 		pack();
 		setVisible(true);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object eventSource = e.getSource();
 		if (eventSource == loginButton) {
 			try {
-				authManager.doLogin(loginInput.getText(), passwordInput.getPassword());
+				windowManager.authManager.doLogin(loginInput.getText(),
+						passwordInput.getPassword());				
+				ChatWindow chatWindow = new ChatWindow(windowManager);
+				dispose();
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, e1, "Connection problem", 0);
+			} catch (InvalidLoginException e1) {
+				JOptionPane.showMessageDialog(null, e1, "Invalid login", 0);
 			}
 		} else if (eventSource == registerButton) {
-			titleLabel.setText("Not login button clicked");
+			RegistrationWindow registrationWindow = new RegistrationWindow(windowManager);
+			dispose();
 		} else {
 			System.exit(0);
 		}

@@ -28,16 +28,11 @@ public class WindowManager {
 	}
 	
 	public void start() {
-		initialize();
-		startListening();
+		showLoginWindow();
 	}
 
-	private void initialize() {
-		LoginWindow welcomeWindow = new LoginWindow(authManager);
-	}
-
-	private void startListening() {
-
+	private void showLoginWindow() {
+		LoginWindow welcomeWindow = new LoginWindow(this);
 	}
 	
 	public void showError(String error) {

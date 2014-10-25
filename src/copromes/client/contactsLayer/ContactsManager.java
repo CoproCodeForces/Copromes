@@ -3,14 +3,14 @@ package copromes.client.contactsLayer;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import copromes.client.networkLayer.Client;
+import copromes.client.networkLayer.Server;
 import copromes.commonInterfaces.IContactsManager;
 import copromes.domainLayer.User;
 
 public class ContactsManager implements IContactsManager {
-	private Client client;
+	private Server client;
 	
-	public ContactsManager(Client client) {
+	public ContactsManager(Server client) {
 		this.client = client;
 	}
 
