@@ -9,7 +9,7 @@ import copromes.commonInterfaces.IAuthorizationManager;
 import copromes.commonInterfaces.IContactsManager;
 import copromes.commonInterfaces.IMessengerManager;
 
-public class Client {
+public class Server {
 
 	private final String host;
 	private final int port;
@@ -17,7 +17,7 @@ public class Client {
 	public IContactsManager contactsManager;
 	public IMessengerManager messengerManager;
 
-	public Client(int port, String host) {
+	public Server(int port, String host) {
 		this.port = port;
 		this.host = host;
 	}

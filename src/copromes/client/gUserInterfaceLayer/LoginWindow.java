@@ -59,7 +59,6 @@ public class LoginWindow extends JFrame implements ActionListener {
 		c.gridy = 0;
 		c.weightx = 0;
 		c.gridwidth = 1;
-		// titleLabel.setBorder(new EmptyBorder(0, 30, 0, 0));
 		panel.add(titleLabel, c);
 
 		JLabel loginLabel = new JLabel("LOGIN");

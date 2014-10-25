@@ -7,15 +7,25 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class RegistrationWindow extends JFrame implements ActionListener {
 
 	private WindowManager windowManager;
 	
-	private JLabel titleLabel;
+	private JTextField loginInput;
+	private JPasswordField passwordInput;
+	private JButton loginButton;
+	private JButton registerButton;
+	
+	
 
 	public RegistrationWindow(WindowManager windowManager) {
 		this.windowManager = windowManager;
@@ -33,7 +43,85 @@ public class RegistrationWindow extends JFrame implements ActionListener {
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 0, 10);
 		
-		titleLabel = new JLabel("REGISTRATION");
+		JLabel titleLabel = new JLabel("REGISTRATION");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 0;
+		c.weightx = 0;
+		c.gridwidth = 1;
+		panel.add(titleLabel, c);
+		
+		JLabel loginLabel = new JLabel("LOGIN");
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 0;
+		c.gridwidth = 1;
+		loginLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
+		panel.add(loginLabel, c);
+
+		loginInput = new JTextField(15);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 1;
+		c.weightx = 0;
+		c.gridwidth = 1;
+		loginInput.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel.add(loginInput, c);
+
+		JLabel passwordLabel = new JLabel("PASSWORD");
+		passwordLabel.setBorder(new EmptyBorder(0, 0, 0, 10));
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.weightx = 0;
+		c.gridwidth = 1;
+		panel.add(passwordLabel, c);
+
+		passwordInput = new JPasswordField(15);
+		passwordInput.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 2;
+		c.weightx = 0;
+		c.gridwidth = 1;
+		panel.add(passwordInput, c);
+
+		loginButton = new JButton("DO LOGIN");
+		loginButton.addActionListener(this);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(10, 100, 0, -100);
+		c.gridx = 0;
+		c.gridy = 3;
+		c.weightx = 0.5;
+		c.gridwidth = 1;
+		panel.add(loginButton, c);
+
+		registerButton = new JButton("FREE REGISTRATION");
+		registerButton.addActionListener(this);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(10, -40, 0, 50);
+		c.gridx = 1;
+		c.gridy = 4;
+		c.weightx = 0;
+		c.gridwidth = 0;
+		panel.add(registerButton, c);
+
+		JButton exitButton = new JButton("EXIT");
+		exitButton.addActionListener(this);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(10, 100, 0, -100);
+		c.gridx = 0;
+		c.gridy = 5;
+		c.weightx = 0;
+		c.gridwidth = 1;
+		panel.add(exitButton, c);
+
+		
+		
+		add(panel);
+		pack();
+		setVisible(true);
 
 	}
 
