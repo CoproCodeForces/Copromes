@@ -12,27 +12,28 @@ import copromes.domainLayer.User;
 
 public class AuthorizationManager {
 
-	private Server client;
+	private Server server;
 
-	public AuthorizationManager(Server client) {
-		this.client = client;
-	}
-	
-	public User doLogin(String name, char[] passwordHash) throws RemoteException, InvalidLoginException {
-		return client.authManager.doLogin(name, String.valueOf(passwordHash));
+	public AuthorizationManager(Server server) {
+		this.server = server;
 	}
 
-	
+	public User doLogin(String name, char[] passwordHash)
+			throws RemoteException, InvalidLoginException {
+		return server.authManager.doLogin(name, String.valueOf(passwordHash));
+	}
+
 	public void doLogout(User user) throws RemoteException {
-		client.authManager.doLogout(user);
+		server.authManager.doLogout(user);
 
 	}
 
-	
-	public User registerUser(String login, String passwordHash,
-			String passwordConfirmationHash, String name, String Bio)
+	public User registerUser(String login, char[] passwordHash,
+			char[] passwordConfirmationHash, String name, String Bio)
 			throws InvalidRegistrationException, RemoteException {
-		return client.authManager.registerUser(login, passwordHash, passwordConfirmationHash, name, Bio);
+		return server.authManager.registerUser(login,
+				String.valueOf(passwordHash),
+				String.valueOf(passwordConfirmationHash), name, Bio);
 	}
 
 }

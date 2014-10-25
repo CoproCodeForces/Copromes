@@ -6,12 +6,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import copromes.domainLayer.User;
+
 public class ChatWindow extends JFrame implements ActionListener {
 	
 	private WindowManager windowManager;
-
-	public ChatWindow(WindowManager windowManager) {
+	private User user;
+	
+	public ChatWindow(WindowManager windowManager, User user) {
 		this.windowManager = windowManager;
+		this.user = user;
 		initUI();
 	}
 	

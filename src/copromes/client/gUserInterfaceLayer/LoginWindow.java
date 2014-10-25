@@ -26,6 +26,7 @@ import javax.swing.border.LineBorder;
 
 import copromes.client.authorizationLayer.AuthorizationManager;
 import copromes.commonInterfaces.InvalidLoginException;
+import copromes.domainLayer.User;
 
 public class LoginWindow extends JFrame implements ActionListener {
 
@@ -103,7 +104,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 		c.insets = new Insets(10, 100, 0, -100);
 		c.gridx = 0;
 		c.gridy = 3;
-		c.weightx = 0.5;
+		c.weightx = 0;
 		c.gridwidth = 1;
 		panel.add(loginButton, c);
 
@@ -137,9 +138,9 @@ public class LoginWindow extends JFrame implements ActionListener {
 		Object eventSource = e.getSource();
 		if (eventSource == loginButton) {
 			try {
-				windowManager.authManager.doLogin(loginInput.getText(),
+				User user = windowManager.authManager.doLogin(loginInput.getText(),
 						passwordInput.getPassword());				
-				ChatWindow chatWindow = new ChatWindow(windowManager);
+				ChatWindow chatWindow = new ChatWindow(windowManager, user);
 				dispose();
 			} catch (RemoteException e1) {
 				JOptionPane.showMessageDialog(null, e1, "Connection problem", 0);

@@ -28,7 +28,7 @@ public class Server {
 				.lookup("authorizationService");
 		contactsManager = (IContactsManager) registry.lookup("contactsService");
 		messengerManager = (IMessengerManager) registry
-				.lookup("messengerSerivce");
+				.lookup("messengerService");
 
 	}
 }

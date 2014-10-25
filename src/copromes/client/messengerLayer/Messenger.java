@@ -7,10 +7,10 @@ import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
 public class Messenger implements IMessengerManager {
-	private Server client;
+	private Server server;
 
-	public Messenger(Server client) {
-		this.client = client;
+	public Messenger(Server server) {
+		this.server = server;
 	}
 
 	@Override
