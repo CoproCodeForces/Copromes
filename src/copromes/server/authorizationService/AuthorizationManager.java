@@ -31,7 +31,6 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 	
 	@Override
 	public User doLogin(String name, String passwordHash) {
-		// TODO Auto-generated method stub
 		try {
 			User user = dbManager.doLogin(name, passwordHash);
 			Client client = new Client(user, getClientHost());
@@ -51,8 +50,8 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 
 	@Override
 	public void doLogout(User user) {
-		// TODO Auto-generated method stub
-		
+		dbManager.doLogout(user);
+		server.clients.remove(user);
 	}
 
 	@Override

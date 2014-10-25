@@ -1,5 +1,8 @@
 package copromes.client.gUserInterfaceLayer;
 
+import java.awt.TrayIcon;
+import java.awt.TrayIcon.MessageType;
+
 import javax.swing.JOptionPane;
 
 import copromes.client.authorizationLayer.*;
@@ -38,6 +41,6 @@ public class WindowManager {
 	}
 	
 	public void showError(String error) {
-		JOptionPane.showMessageDialog(null, error);
+		JOptionPane.showMessageDialog(null, error, "Copromes error", 0);
 	}
 }

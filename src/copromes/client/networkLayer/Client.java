@@ -22,7 +22,7 @@ public class Client {
 		this.host = host;
 	}
 
-	public void setInterfaces() throws RemoteException, NotBoundException {
+	public void setInterfaces() throws RemoteException, NotBoundException {		
 		Registry registry = LocateRegistry.getRegistry(host, port);
 		authManager = (IAuthorizationManager) registry
 				.lookup("authorizationService");
