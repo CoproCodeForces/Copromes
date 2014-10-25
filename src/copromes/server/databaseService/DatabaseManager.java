@@ -3,7 +3,7 @@ package copromes.server.databaseService;
 import java.util.Date;
 import java.util.List;
 
-import copromes.commonInterfaces.RegistrationException;
+import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
@@ -48,7 +48,7 @@ public class DatabaseManager {
 
 	public User registerUser(String login, String passwordHash,
 			String passwordConfirmationHash, String name, String Bio)
-			throws RegistrationException {
+			throws InvalidRegistrationException {
 		// TODO Auto-generated method stub
 		return null;
 	}

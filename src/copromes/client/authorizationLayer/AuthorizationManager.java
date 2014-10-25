@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 
 import copromes.client.networkLayer.Client;
 import copromes.commonInterfaces.IAuthorizationManager;
-import copromes.commonInterfaces.RegistrationException;
+import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.User;
 
 public class AuthorizationManager {
@@ -30,7 +30,7 @@ public class AuthorizationManager {
 	
 	public User registerUser(String login, String passwordHash,
 			String passwordConfirmationHash, String name, String Bio)
-			throws RegistrationException, RemoteException {
+			throws InvalidRegistrationException, RemoteException {
 		return client.authManager.registerUser(login, passwordHash, passwordConfirmationHash, name, Bio);
 	}
 

@@ -6,7 +6,7 @@ import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
 
 import copromes.commonInterfaces.IAuthorizationManager;
-import copromes.commonInterfaces.RegistrationException;
+import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.User;
 import copromes.server.databaseService.DatabaseManager;
 import copromes.server.networkService.Client;
@@ -57,7 +57,7 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 	@Override
 	public User registerUser(String login, String passwordHash,
 			String passwordConfirmationHash, String name, String Bio)
-			throws RegistrationException {
+			throws InvalidRegistrationException {
 		// TODO Auto-generated method stub
 		return null;
 	}
