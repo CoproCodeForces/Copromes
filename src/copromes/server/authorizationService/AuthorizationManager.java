@@ -6,6 +6,7 @@ import java.rmi.server.RemoteServer;
 import java.rmi.server.ServerNotActiveException;
 
 import copromes.commonInterfaces.IAuthorizationManager;
+import copromes.commonInterfaces.InvalidLoginException;
 import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.User;
 import copromes.server.databaseService.DatabaseManager;
@@ -30,14 +31,12 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 	}
 	
 	@Override
-	public User doLogin(String name, String passwordHash) {
+	public User doLogin(String name, String passwordHash) throws RemoteException, InvalidLoginException {
 		try {
 			User user = dbManager.doLogin(name, passwordHash);
 			Client client = new Client(user, getClientHost());
 			server.clients.add(client);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return user;
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
