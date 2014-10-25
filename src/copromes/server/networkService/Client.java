@@ -8,7 +8,7 @@ import java.rmi.registry.Registry;
 import copromes.commonInterfaces.IServerResponseManager;
 import copromes.domainLayer.User;
 
-public class Client {
+public class Client extends Thread {
 		
 	private String host;
 	private User user;
@@ -19,8 +19,20 @@ public class Client {
 	
 	public Client(User user, String host) throws RemoteException, NotBoundException {
 		this.user = user;
-		this.host = host;
-		getClientHost();
+		this.host = host;		
+	}
+	
+	@Override
+	public void run() {
+		try {
+			getClientHost();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void getClientHost() throws RemoteException, NotBoundException {

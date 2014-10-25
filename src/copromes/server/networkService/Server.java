@@ -18,10 +18,12 @@ public class Server {
 	private int port;	
 	public List<Client> clients;
 	
+	
 	public Server(int port) throws RemoteException {
 		this.port = port;
 		registry = LocateRegistry.createRegistry(port);
 		clients = new ArrayList<Client>();
+		new Thread(new ClientChecker(clients)).run();
 	}
 
 	public void setupAuthManager(AuthorizationManager authManager) {
@@ -56,4 +58,25 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
+}
+
+final class ClientChecker implements Runnable {
+
+	private List<Client> clients;
+	
+	public ClientChecker(List<Client> clients) {
+		this.clients = clients;
+	}
+	
+	@Override
+	public void run() {		
+		for (Client client : clients) {
+			try {
+				client.client.isConnected();
+			} catch (RemoteException e) {
+				clients.remove(client);
+			}
+		}
+	}
+	
 }
