@@ -1,5 +1,7 @@
 package copromes.client.authorizationLayer;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 
 import copromes.client.networkLayer.Client;
@@ -7,26 +9,25 @@ import copromes.commonInterfaces.IAuthorizationManager;
 import copromes.commonInterfaces.RegistrationException;
 import copromes.domainLayer.User;
 
-public class AuthorizationManager implements IAuthorizationManager {
+public class AuthorizationManager {
 
 	private Client client;
 
 	public AuthorizationManager(Client client) {
 		this.client = client;
 	}
-
-	@Override
-	public User doLogin(String name, String passwordHash) throws RemoteException {
-		return client.authManager.doLogin(name, passwordHash);
+	
+	public User doLogin(String name, char[] passwordHash) throws RemoteException {
+		return client.authManager.doLogin(name, String.valueOf(passwordHash));
 	}
 
-	@Override
+	
 	public void doLogout(User user) throws RemoteException {
 		client.authManager.doLogout(user);
 
 	}
 
-	@Override
+	
 	public User registerUser(String login, String passwordHash,
 			String passwordConfirmationHash, String name, String Bio)
 			throws RegistrationException, RemoteException {
