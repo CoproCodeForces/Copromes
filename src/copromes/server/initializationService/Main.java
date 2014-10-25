@@ -1,12 +1,30 @@
 package copromes.server.initializationService;
 
+import java.rmi.RemoteException;
+
+import copromes.server.contactsService.*;
+import copromes.server.authorizationService.AuthorizationManager;
+import copromes.server.databaseService.DatabaseManager;
+import copromes.server.messengerService.MessengerManager;
+import copromes.server.networkService.Server;
+
 public class Main {
 
-	/**
-	 * @param args
-	 */
+	private final static int port = 7331;
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		try {
+			Server server = new Server(port);
+			
+			DatabaseManager dbManager = new DatabaseManager();			
+			AuthorizationManager authorizationManager = new AuthorizationManager(server, dbManager);			
+			ContactsManager contactsManager = new ContactsManager(server, dbManager);			
+			MessengerManager messengerManager = new MessengerManager(server, dbManager);			
+			
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
 
 	}
 

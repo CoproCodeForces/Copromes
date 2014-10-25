@@ -33,9 +33,10 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 	@Override
 	public User doLogin(String name, String passwordHash) throws RemoteException, InvalidLoginException {
 		try {
-			User user = dbManager.doLogin(name, passwordHash);
+			User user = dbManager.doLogin(name, passwordHash);			
 			Client client = new Client(user, getClientHost());
-			server.clients.add(client);
+			client.start();			
+			server.clients.add(client);			
 			return user;
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block

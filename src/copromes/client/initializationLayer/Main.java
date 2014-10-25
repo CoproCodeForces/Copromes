@@ -4,7 +4,7 @@ import copromes.client.authorizationLayer.AuthorizationManager;
 import copromes.client.contactsLayer.ContactsManager;
 import copromes.client.gUserInterfaceLayer.*;
 import copromes.client.messengerLayer.Messenger;
-import copromes.client.networkLayer.Client;
+import copromes.client.networkLayer.Server;
 import copromes.client.serverResponseHandler.ResponseHandler;
 
 public class Main {
@@ -19,7 +19,7 @@ public class Main {
 		
 		try {			
 			// Initializing access to server host			
-			Client client = new Client(serverPort, host);			
+			Server client = new Server(serverPort, host);			
 			// Accessing server remote interfaces 
 			client.setInterfaces();
 			
