@@ -25,7 +25,6 @@ public class AuthorizationManager {
 
 	public void doLogout(User user) throws RemoteException {
 		server.authManager.doLogout(user);
-
 	}
 
 	public User registerUser(String login, char[] passwordHash,
