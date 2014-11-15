@@ -24,6 +24,7 @@ public class Server {
 		registry = LocateRegistry.createRegistry(port);
 		clients = new ArrayList<Client>();
 		new Thread(new ClientChecker(clients)).run();
+                
 	}
 
 	public void setupAuthManager(AuthorizationManager authManager) {
@@ -69,7 +70,10 @@ final class ClientChecker implements Runnable {
 	}
 	
 	@Override
-	public void run() {		
+	public void run() {
+            try{
+            while(3<5)
+            {
 		for (Client client : clients) {
 			try {
 				client.client.isConnected();
@@ -77,6 +81,12 @@ final class ClientChecker implements Runnable {
 				clients.remove(client);
 			}
 		}
+                Thread.sleep(10000);
+            }
+            }catch(InterruptedException ex)
+                    {
+                        System.err.println("ClientChecker error");
+                    }
 	}
 	
 }
