@@ -24,8 +24,8 @@ public class MessengerManager implements IMessengerManager {
 	}
 
 	@Override
-	public Message sendMessage(User author, String message, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
+	public void sendMessage(User author, String message, ChatRoom chatRoom) {
+		// database manager exceptions should be added here
 		Message msg = dbManager.createMessage(author, message, chatRoom);
 		for (Client client : server.clients) {
 			try {
@@ -34,31 +34,51 @@ public class MessengerManager implements IMessengerManager {
 				server.clients.remove(client);
 			}
 		}
-
-		return msg;
 	}
 
 	@Override
 	public ChatRoom createChatRoom(User user, String name) {
-		// TODO Auto-generated method stub
-		return null;
+		// database manager exceptions should be added here
+		ChatRoom chatRoom = dbManager.createChatRoom(user, name);
+		return chatRoom;
 	}
 
 	@Override
-	public ChatRoom addUserToChatRoom(User user, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public void addUserToChatRoom(User user, ChatRoom chatRoom) {
+		// database manager exceptions should be added here
+		dbManager.addUserToChatRoom(user, chatRoom);
+		for (Client client : server.clients) {
+			try {
+				client.client.updateChatRoom(chatRoom);
+			} catch (RemoteException e) {
+				server.clients.remove(client);
+			}
+		}
 	}
 
 	@Override
-	public ChatRoom deleteUserFromChatRoom(User user, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUserFromChatRoom(User user, ChatRoom chatRoom) {
+		// database manager exceptions should be added here
+		dbManager.deleteUserFromChatRoom(user, chatRoom);
+		for (Client client : server.clients) {
+			try {
+				client.client.updateChatRoom(chatRoom);
+			} catch (RemoteException e) {
+				server.clients.remove(client);
+			}
+		}
 	}
 
 	@Override
 	public void deleteChatRoom(ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-
+		// database manager exceptions should be added here
+		dbManager.deleteChatRoom(chatRoom);
+		for (Client client : server.clients) {
+			try {
+				client.client.removeChatRoom(chatRoom);
+			} catch (RemoteException e) {
+				server.clients.remove(client);
+			}
+		}
 	}
 }
