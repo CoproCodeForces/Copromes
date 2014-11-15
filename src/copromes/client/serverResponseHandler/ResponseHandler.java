@@ -6,6 +6,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import copromes.commonInterfaces.IServerResponseManager;
+import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
@@ -37,6 +38,18 @@ public class ResponseHandler implements IServerResponseManager {
 	@Override
 	public void isConnected() {
 
+	}
+
+	@Override
+	public void updateChatRoom(ChatRoom chatRoom) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeChatRoom(ChatRoom chatRoom) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

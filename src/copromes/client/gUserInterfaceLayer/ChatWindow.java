@@ -104,6 +104,7 @@ public class ChatWindow extends JFrame implements ActionListener {
 		if (eventSource == sendMessageButton) {
 			try {
 //				windowManager.messengerManager.sendMessage(messageInput.getText(), chatRoom);
+				windowManager.messengerManager.sendMessage(user, messageInput.getText(), chatRoom);
 				messageInput.setText(null);
 				
 			}

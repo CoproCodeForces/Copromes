@@ -14,9 +14,9 @@ public class Messenger implements IMessengerManager {
 	}
 
 	@Override
-	public Message sendMessage(String message, ChatRoom chatRoom) {
+	public void sendMessage(User author, String message, ChatRoom chatRoom) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
@@ -26,15 +26,15 @@ public class Messenger implements IMessengerManager {
 	}
 
 	@Override
-	public ChatRoom addUserToChatRoom(User user, ChatRoom chatRoom) {
+	public void addUserToChatRoom(User user, ChatRoom chatRoom) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public ChatRoom deleteUserFromChatRoom(User user, ChatRoom chatRoom) {
+	public void deleteUserFromChatRoom(User user, ChatRoom chatRoom) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
