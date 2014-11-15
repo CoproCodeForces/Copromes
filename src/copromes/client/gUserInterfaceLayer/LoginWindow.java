@@ -140,7 +140,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 			try {
 				User user = windowManager.authManager.doLogin(loginInput.getText(),
 						passwordInput.getPassword());				
-				ChatWindow chatWindow = new ChatWindow(windowManager, user);
+				windowManager.chatWindow = new ChatWindow(windowManager, user);
 				dispose();
 			} catch (RemoteException e1) {
 				JOptionPane.showMessageDialog(null, e1, "Connection problem", 0);
