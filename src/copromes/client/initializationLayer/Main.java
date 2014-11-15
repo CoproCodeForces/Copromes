@@ -10,9 +10,9 @@ import copromes.client.serverResponseHandler.ResponseHandler;
 
 public class Main {
 
-	private final static int serverPort = 8814;
+	private final static int serverPort = 1488;
 	private final static int clientPort = 13337;
-	private final static String host = "192.168.43.248";
+	private final static String host = "192.168.43.144";
 
 	public static void main(String[] args) {
 
@@ -39,6 +39,7 @@ public class Main {
 
 			windowManager.start();
 		} catch (Exception e) {
+			e.printStackTrace();
 			windowManager.showError(e.getMessage());
 		}
 	}

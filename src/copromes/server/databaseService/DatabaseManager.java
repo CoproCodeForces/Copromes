@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.sql.*;
 
-
 import copromes.commonInterfaces.InvalidLoginException;
 import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.ChatRoom;
@@ -14,18 +13,14 @@ import copromes.domainLayer.User;
 public class DatabaseManager {
 
 	public DatabaseManager() {
-            try
-            {
-            Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/coprobase", "test", "12345"
-            );
-            }catch(SQLException e)
-            {
-                System.err.println(e.getMessage());
-            }
-            
-	}
+		try {
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/coprobase", "test", "12345");
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
 
+	}
 
 	public void addFriend(User friend) {
 		// TODO Auto-generated method stub
@@ -42,9 +37,11 @@ public class DatabaseManager {
 		return null;
 	}
 
-	public User doLogin(String name, String passwordHash) throws InvalidLoginException {
-		//For debug purposes only; there should be some database-related code 
-		if ((name.equals("Mitya") && passwordHash.equals("kek")) || (name.equals("Mikhail") && passwordHash.equals("lel"))) {
+	public User doLogin(String name, String passwordHash)
+			throws InvalidLoginException {
+		// For debug purposes only; there should be some database-related code
+		if ((name.equals("Mitya") && passwordHash.equals("kek"))
+				|| (name.equals("Mikhail") && passwordHash.equals("lel"))) {
 			return new User(1, name, passwordHash, name, "Silly Idiot");
 		} else {
 			throw new InvalidLoginException("Invalid credentials entered");
