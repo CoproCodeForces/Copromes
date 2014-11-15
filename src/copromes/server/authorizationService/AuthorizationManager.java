@@ -18,7 +18,6 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private Server server;
 	private DatabaseManager dbManager;
 	
