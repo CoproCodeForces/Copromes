@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import copromes.domainLayer.ChatRoom;
+import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
 public class ChatWindow extends JFrame implements ActionListener {
@@ -97,13 +98,20 @@ public class ChatWindow extends JFrame implements ActionListener {
 		pack();
 		setVisible(true);
 	}
+	
+	public void printMessage(Message message){
+		System.out.println("13235");
+		chatArea.append(message.toString());		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object eventSource = e.getSource();
 		if (eventSource == sendMessageButton) {
 			try {
+				System.out.print("lol");
 				windowManager.messengerManager.sendMessage(user, messageInput.getText(), chatRoom);
+				System.out.print("lol2");
 				messageInput.setText(null);
 				
 			}

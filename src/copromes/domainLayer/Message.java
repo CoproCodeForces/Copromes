@@ -34,4 +34,9 @@ public class Message implements Serializable {
 	public Date getDate() {
 		return date;
 	}
+	
+	@Override
+	public String toString() {
+		return date + " " + author.getName() + ": " + message + "\n";
+	}
 }

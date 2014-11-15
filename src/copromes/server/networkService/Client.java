@@ -10,8 +10,8 @@ import copromes.domainLayer.User;
 
 public class Client extends Thread {
 		
-	private String host;
-	private User user;
+	public String host;
+	public User user;
 	private Registry registry;
 	private final int port = 13337;
 	
@@ -25,7 +25,7 @@ public class Client extends Thread {
 	@Override
 	public void run() {
 		try {
-			getClientHost();
+			getClientInterfaces();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class Client extends Thread {
 		}
 	}
 	
-	private void getClientHost() throws RemoteException, NotBoundException {
+	public void getClientInterfaces() throws RemoteException, NotBoundException {
 		registry = LocateRegistry.getRegistry(host, port);
 		client = (IServerResponseManager) registry.lookup("serverResponseManager");
 	}

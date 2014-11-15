@@ -24,15 +24,30 @@ public class MessengerManager implements IMessengerManager {
 	}
 
 	@Override
-	public void sendMessage(User author, String message, ChatRoom chatRoom) {
+	public void sendMessage(final User author, String message, ChatRoom chatRoom) {
 		// database manager exceptions should be added here
-		Message msg = dbManager.createMessage(author, message, chatRoom);
-		for (Client client : server.clients) {
-			try {
-				client.client.recieveMessage(author, msg);
-			} catch (RemoteException e) {
-				server.clients.remove(client);
-			}
+		final Message msg = dbManager.createMessage(author, message, chatRoom);
+		System.out.println("message created");
+		for (final Client client : server.clients) {
+			System.out.println("sending message for " + client.host + " "
+					+ client.user.getName());
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						if (client.client == null) {
+							System.out.println("client is null ffs");
+						} else {
+							client.client.recieveMessage(author, msg);
+						}
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						System.out.println("caught exception");
+						e.printStackTrace();
+						server.clients.remove(client);
+					}
+				}
+			}).start();
 		}
 	}
 

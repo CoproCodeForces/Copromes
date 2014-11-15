@@ -10,22 +10,13 @@ import copromes.server.databaseService.DatabaseManager;
 import copromes.server.messengerService.MessengerManager;
 import copromes.server.networkService.Server;
 
-final class kek {
-	public List<String> l;
-	
-	public kek(List<String> t) {
-		l = t;
-	}
-}
-
 public class Main {
 
-	private final static int port = 7331;
+	private final static int port = 8814;
 	
 	public static void main(String[] args) {
 		try {
-			Server server = new Server(port);
-			List<String> t = new ArrayList<String>();
+			Server server = new Server(port);			
 			
 			DatabaseManager dbManager = new DatabaseManager();			
 			AuthorizationManager authorizationManager = new AuthorizationManager(server, dbManager);			

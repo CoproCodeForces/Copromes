@@ -25,6 +25,7 @@ public class Server {
 		clients = new ArrayList<Client>();
 		new Thread(new ClientChecker(clients)).run();
                 
+
 	}
 
 	public void setupAuthManager(AuthorizationManager authManager) {
