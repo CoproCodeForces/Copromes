@@ -15,10 +15,7 @@ import copromes.server.networkService.Server;
 
 public class AuthorizationManager extends RemoteServer implements IAuthorizationManager {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private Server server;
 	private DatabaseManager dbManager;
 	

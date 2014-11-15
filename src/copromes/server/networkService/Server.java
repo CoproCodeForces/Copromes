@@ -23,7 +23,7 @@ public class Server {
 		this.port = port;
 		registry = LocateRegistry.createRegistry(port);
 		clients = new ArrayList<Client>();
-		new Thread(new ClientChecker(clients)).run();
+		new Thread(new ClientChecker(clients)).start();
                 
 
 	}
