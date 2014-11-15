@@ -13,7 +13,7 @@ public class User implements Serializable {
 	private String login;
 	private String password;
 	private String name;
-	private String bio;
+	private String bio; // TODO add in database 
 	private List<ChatRoom> chatRooms;
 	private Date registrationDate;
 	private Date lastSeenDate;

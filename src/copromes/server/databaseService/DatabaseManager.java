@@ -2,6 +2,8 @@ package copromes.server.databaseService;
 
 import java.util.Date;
 import java.util.List;
+import java.sql.*;
+
 
 import copromes.commonInterfaces.InvalidLoginException;
 import copromes.commonInterfaces.InvalidRegistrationException;
@@ -12,13 +14,18 @@ import copromes.domainLayer.User;
 public class DatabaseManager {
 
 	public DatabaseManager() {
-
+            try
+            {
+            Connection con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/coprobase", "test", "12345"
+            );
+            }catch(SQLException e)
+            {
+                System.err.println(e.getMessage());
+            }
+            
 	}
 
-	public List<User> getUsersOnline() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void addFriend(User friend) {
 		// TODO Auto-generated method stub
