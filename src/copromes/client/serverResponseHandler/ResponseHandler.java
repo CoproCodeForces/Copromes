@@ -4,35 +4,26 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Observable;
 
+import javafx.beans.InvalidationListener;
+import copromes.client.gUserInterfaceLayer.WindowManager;
+import copromes.client.networkLayer.ServerResponseHost;
 import copromes.commonInterfaces.IServerResponseManager;
 import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
 public class ResponseHandler implements IServerResponseManager {
-	private final int port;
-	private Registry registry;
+	public WindowManager windowManager;
 
-	public ResponseHandler(int port) throws RemoteException {
-		this.port = port;
-		registry = LocateRegistry.createRegistry(port);
-	}
-
-	public void setupClientHost() {
-		try {
-			IServerResponseManager servStub = (IServerResponseManager) UnicastRemoteObject
-					.exportObject(this, port);
-			registry.rebind("serverResponseManager", servStub);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public ResponseHandler() throws RemoteException {
+		super();
 	}
 
 	@Override
 	public void recieveMessage(User user, Message message) {
-		// TODO Auto-generated method stub
+		windowManager.chatWindow.printMessage(message);
 	}
 
 	@Override
@@ -43,13 +34,12 @@ public class ResponseHandler implements IServerResponseManager {
 	@Override
 	public void updateChatRoom(ChatRoom chatRoom) throws RemoteException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeChatRoom(ChatRoom chatRoom) throws RemoteException {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 }

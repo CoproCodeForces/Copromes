@@ -1,5 +1,7 @@
 package copromes.client.messengerLayer;
 
+import java.rmi.RemoteException;
+
 import copromes.client.networkLayer.Server;
 import copromes.commonInterfaces.IMessengerManager;
 import copromes.domainLayer.ChatRoom;
@@ -14,9 +16,8 @@ public class Messenger implements IMessengerManager {
 	}
 
 	@Override
-	public void sendMessage(User author, String message, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		
+	public void sendMessage(User author, String message, ChatRoom chatRoom) throws RemoteException {
+		server.messengerManager.sendMessage(author, message, chatRoom);		
 	}
 
 	@Override
