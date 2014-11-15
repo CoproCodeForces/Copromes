@@ -8,12 +8,14 @@ import javax.swing.JOptionPane;
 import copromes.client.authorizationLayer.*;
 import copromes.client.contactsLayer.ContactsManager;
 import copromes.client.messengerLayer.*;
+import copromes.domainLayer.User;
 
 public class WindowManager {
 
 	public Messenger messengerManager;
 	public AuthorizationManager authManager;
 	public ContactsManager contactsManager;
+	private User user;
 	
 	public WindowManager(Messenger messengerManager,
 			AuthorizationManager authManager, ContactsManager contactsManager) {
@@ -32,7 +34,7 @@ public class WindowManager {
 	}
 
 	private void showLoginWindow() {
-		LoginWindow welcomeWindow = new LoginWindow(this);
+		ChatWindow chatWindow = new ChatWindow(this, user );
 	}
 	
 	public void showError(String error) {

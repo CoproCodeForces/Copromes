@@ -18,23 +18,23 @@ public class Main {
 		WindowManager windowManager = new WindowManager(); 
 		
 		try {			
-			// Initializing access to server host			
-			Server server = new Server(serverPort, host);			
-			// Accessing server remote interfaces 
-			server.setInterfaces();
-			
-			// Initializing local managers for GUI events handling
-			AuthorizationManager authManager = new AuthorizationManager(server);
-			ContactsManager contactsManager = new ContactsManager(server);
-			Messenger messenger = new Messenger(server);
-
-			// Initializing local manager for server event handling
-			ResponseHandler responseHandler = new ResponseHandler(clientPort);
-			responseHandler.setupClientHost();
-
-			// Initializing GUI;
-			windowManager = new WindowManager(messenger,
-					authManager, contactsManager);
+////			// Initializing access to server host			
+////			Server server = new Server(serverPort, host);			
+////			// Accessing server remote interfaces 
+////			server.setInterfaces();
+////			
+//			// Initializing local managers for GUI events handling
+//			AuthorizationManager authManager = new AuthorizationManager(server);
+//			ContactsManager contactsManager = new ContactsManager(server);
+//			Messenger messenger = new Messenger(server);
+//
+//			// Initializing local manager for server event handling
+//			ResponseHandler responseHandler = new ResponseHandler(clientPort);
+//			responseHandler.setupClientHost();
+//
+//			// Initializing GUI;
+//			windowManager = new WindowManager(messenger,
+//					authManager, contactsManager);
 			windowManager.start();
 		} catch (Exception e) {
 			windowManager.showError(e.getMessage());		
