@@ -58,9 +58,9 @@ public class DatabaseManager {
 		return null;
 	}
 
-	public Message sendMessage(String message, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public Message createMessage(User author, String message, ChatRoom chatRoom) {
+		// TODO reimplement with db
+		return new Message(1, message, author, chatRoom, new Date());
 	}
 
 	public ChatRoom createChatRoom(User user, String name) {

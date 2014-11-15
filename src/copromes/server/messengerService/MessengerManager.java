@@ -1,52 +1,84 @@
 package copromes.server.messengerService;
 
+import java.rmi.RemoteException;
+
 import copromes.commonInterfaces.IMessengerManager;
 import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 import copromes.server.databaseService.DatabaseManager;
+import copromes.server.networkService.Client;
 import copromes.server.networkService.Server;
 
 public class MessengerManager implements IMessengerManager {
-	
+
 	private Server server;
 	private DatabaseManager dbManager;
-	
+
 	public MessengerManager(Server server, DatabaseManager dbManager) {
 		super();
 		this.server = server;
 		this.server.setupMessengerManager(this);
-		
+
 		this.dbManager = dbManager;
 	}
 
 	@Override
-	public Message sendMessage(String message, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public void sendMessage(User author, String message, ChatRoom chatRoom) {
+		// database manager exceptions should be added here
+		Message msg = dbManager.createMessage(author, message, chatRoom);
+		for (Client client : server.clients) {
+			try {
+				client.client.recieveMessage(author, msg);
+			} catch (RemoteException e) {
+				server.clients.remove(client);
+			}
+		}
 	}
 
 	@Override
 	public ChatRoom createChatRoom(User user, String name) {
-		// TODO Auto-generated method stub
-		return null;
+		// database manager exceptions should be added here
+		ChatRoom chatRoom = dbManager.createChatRoom(user, name);
+		return chatRoom;
 	}
 
 	@Override
-	public ChatRoom addUserToChatRoom(User user, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public void addUserToChatRoom(User user, ChatRoom chatRoom) {
+		// database manager exceptions should be added here
+		dbManager.addUserToChatRoom(user, chatRoom);
+		for (Client client : server.clients) {
+			try {
+				client.client.updateChatRoom(chatRoom);
+			} catch (RemoteException e) {
+				server.clients.remove(client);
+			}
+		}
 	}
 
 	@Override
-	public ChatRoom deleteUserFromChatRoom(User user, ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUserFromChatRoom(User user, ChatRoom chatRoom) {
+		// database manager exceptions should be added here
+		dbManager.deleteUserFromChatRoom(user, chatRoom);
+		for (Client client : server.clients) {
+			try {
+				client.client.updateChatRoom(chatRoom);
+			} catch (RemoteException e) {
+				server.clients.remove(client);
+			}
+		}
 	}
 
 	@Override
 	public void deleteChatRoom(ChatRoom chatRoom) {
-		// TODO Auto-generated method stub
-		
+		// database manager exceptions should be added here
+		dbManager.deleteChatRoom(chatRoom);
+		for (Client client : server.clients) {
+			try {
+				client.client.removeChatRoom(chatRoom);
+			} catch (RemoteException e) {
+				server.clients.remove(client);
+			}
+		}
 	}
 }
