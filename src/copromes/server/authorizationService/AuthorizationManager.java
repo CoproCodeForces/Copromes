@@ -35,7 +35,8 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 		try {
 			User user = dbManager.doLogin(name, passwordHash);			
 			Client client = new Client(user, getClientHost());
-			client.start();			
+			//client.start();
+			client.getClientInterfaces();
 			server.clients.add(client);			
 			return user;
 		} catch (NotBoundException e) {
