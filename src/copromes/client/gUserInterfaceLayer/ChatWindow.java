@@ -32,9 +32,13 @@ public class ChatWindow extends JFrame implements ActionListener {
 	private JTextField messageInput;
 	private JButton sendMessageButton;
 
-	public ChatWindow(WindowManager windowManager, User user) {
-		this.windowManager = windowManager;
-		this.user = user;
+//	public ChatWindow(WindowManager windowManager, User user) {
+//		this.windowManager = windowManager;
+//		this.user = user;
+//		initUI();
+//	}
+	
+	public ChatWindow () {
 		initUI();
 	}
 
