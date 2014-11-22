@@ -13,7 +13,7 @@ public class Client extends Thread {
 	public String host;
 	public User user;
 	private Registry registry;
-	private final int port = 13337;
+	private final int port = 13377;
 	
 	public IServerResponseManager client;
 	
@@ -37,6 +37,8 @@ public class Client extends Thread {
 	
 	public void getClientInterfaces() throws RemoteException, NotBoundException {
 		registry = LocateRegistry.getRegistry(host, port);
+                System.out.println("[server] "+user.getName()+" interfased registied");
 		client = (IServerResponseManager) registry.lookup("serverResponseManager");
+                System.out.println("[server] "+user.getName()+" interfased cliented");
 	}
 }

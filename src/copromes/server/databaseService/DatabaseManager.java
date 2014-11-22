@@ -12,9 +12,11 @@ import copromes.domainLayer.User;
 
 public class DatabaseManager {
     
+    private Connection con;
+    
 	public DatabaseManager() {
 		try {
-			Connection con = DriverManager.getConnection(
+			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/coprobase", "test", "12345");
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -58,7 +60,11 @@ public class DatabaseManager {
 	public User registerUser(String login, String passwordHash,
 			String passwordConfirmationHash, String name, String Bio)
 			throws InvalidRegistrationException {
-		// TODO Auto-generated method stub
+		
+                PreparedStatement userInsert = null;
+                //try{
+                    
+                //}
 		return null;
 	}
 
