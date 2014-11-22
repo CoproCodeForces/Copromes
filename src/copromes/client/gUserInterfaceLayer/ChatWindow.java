@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import javafx.scene.input.KeyCode;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -41,7 +40,7 @@ public class ChatWindow extends JFrame {
 	private JTextField messageInput;
 	private JButton sendMessageButton;
 
-	public ChatWindow(WindowManager windowManager, User user) {
+	public ChatWindow(WindowManager windowManager, User user) throws RemoteException {
 		this.windowManager = windowManager;
 		this.user = user;
 		initUI();

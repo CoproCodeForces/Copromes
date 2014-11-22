@@ -20,7 +20,7 @@ import javax.swing.border.LineBorder;
 import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.User;
 
-public class RegistrationWindow extends JFrame implements ActionListener {
+public class RegistrationWindow extends JFrame {
 
 	private WindowManager windowManager;
 
