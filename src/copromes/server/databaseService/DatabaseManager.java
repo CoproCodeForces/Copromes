@@ -11,7 +11,7 @@ import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
 public class DatabaseManager {
-
+    
 	public DatabaseManager() {
 		try {
 			Connection con = DriverManager.getConnection(
@@ -86,4 +86,8 @@ public class DatabaseManager {
 		// TODO Auto-generated method stub
 
 	}
+            
+        public void getContacts(User user) {
+                // TODO
+        }
 }
