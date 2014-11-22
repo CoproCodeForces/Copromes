@@ -17,12 +17,12 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			Server server = new Server(port);			
-                        System.out.println("Starting server");
+                        System.out.println("[server] Starting server");
 			DatabaseManager dbManager = new DatabaseManager();			
 			AuthorizationManager authorizationManager = new AuthorizationManager(server, dbManager);			
 			ContactsManager contactsManager = new ContactsManager(server, dbManager);			
 			MessengerManager messengerManager = new MessengerManager(server, dbManager);						
-                        System.out.println("Server started");
+                        System.out.println("[server] Server started");
                         
 		} catch (RemoteException e) {
 

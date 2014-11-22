@@ -75,7 +75,8 @@ final class ClientChecker implements Runnable {
 				for (Client client : clients) {
 					try {
 						client.client.isConnected();
-					} catch (RemoteException e) {
+					} catch (Exception e) {
+                                                System.out.println("[server] "+client.user.getName() + "disconected");
 						clients.remove(client);
 					}
 				}
