@@ -25,10 +25,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import copromes.client.authorizationLayer.AuthorizationManager;
+import copromes.client.gUserInterfaceLayer.ChatWindow.TextInputListener;
 import copromes.commonInterfaces.InvalidLoginException;
 import copromes.domainLayer.User;
 
-public class LoginWindow extends JFrame implements ActionListener {
+public class LoginWindow extends JFrame {
 
 	private WindowManager windowManager;
 
@@ -49,6 +50,9 @@ public class LoginWindow extends JFrame implements ActionListener {
 		setBackground(new Color(255, 255, 255));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		LoginButtonListner loginButtonListner = new LoginButtonListner();
+		RegistrationButtonListner registrationButtonListner = new RegistrationButtonListner();
+		ExitButtonListner exitButtonListner = new ExitButtonListner();
 
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -72,6 +76,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 		panel.add(loginLabel, c);
 
 		loginInput = new JTextField(15);
+		loginInput.addActionListener(loginButtonListner);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 1;
@@ -91,6 +96,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 
 		passwordInput = new JPasswordField(15);
 		passwordInput.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		passwordInput.addActionListener(loginButtonListner);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 2;
@@ -99,7 +105,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 		panel.add(passwordInput, c);
 
 		loginButton = new JButton("DO LOGIN");
-		loginButton.addActionListener(this);
+		loginButton.addActionListener(loginButtonListner);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(10, 100, 0, -100);
 		c.gridx = 0;
@@ -109,7 +115,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 		panel.add(loginButton, c);
 
 		registerButton = new JButton("FREE REGISTRATION");
-		registerButton.addActionListener(this);
+		registerButton.addActionListener(registrationButtonListner);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(10, -40, 0, 50);
 		c.gridx = 1;
@@ -119,7 +125,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 		panel.add(registerButton, c);
 
 		JButton exitButton = new JButton("EXIT");
-		exitButton.addActionListener(this);
+		exitButton.addActionListener(exitButtonListner);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(10, 100, 0, -100);
 		c.gridx = 0;
@@ -133,25 +139,45 @@ public class LoginWindow extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object eventSource = e.getSource();
-		if (eventSource == loginButton) {
+	class LoginButtonListner implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
 			try {
-				User user = windowManager.authManager.doLogin(loginInput.getText(),
-						passwordInput.getPassword());				
+				User user = windowManager.authManager.doLogin(
+						loginInput.getText(), passwordInput.getPassword());
 				windowManager.chatWindow = new ChatWindow(windowManager, user);
 				dispose();
 			} catch (RemoteException e1) {
-				JOptionPane.showMessageDialog(null, e1, "Connection problem", 0);
+				JOptionPane
+						.showMessageDialog(null, e1, "Connection problem", 0);
 			} catch (InvalidLoginException e1) {
 				JOptionPane.showMessageDialog(null, e1, "Invalid login", 0);
 			}
-		} else if (eventSource == registerButton) {
-			RegistrationWindow registrationWindow = new RegistrationWindow(windowManager);
+
+		}
+
+	}
+
+	class RegistrationButtonListner implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			RegistrationWindow registrationWindow = new RegistrationWindow(
+					windowManager);
 			dispose();
-		} else {
+
+		}
+
+	}
+
+	class ExitButtonListner implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
 			System.exit(0);
 		}
+
 	}
+
 }
