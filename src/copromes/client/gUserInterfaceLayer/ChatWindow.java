@@ -41,9 +41,11 @@ public class ChatWindow extends JFrame {
 	private JTextField messageInput;
 	private JButton sendMessageButton;
 
-	public ChatWindow(WindowManager windowManager, User user) {
+	public ChatWindow(WindowManager windowManager, User user)
+			throws RemoteException {
 		this.windowManager = windowManager;
 		this.user = user;
+		System.out.print("JOPA");
 		initUI();
 	}
 
@@ -76,7 +78,7 @@ public class ChatWindow extends JFrame {
 		usersArea = new JTextArea(30, 15);
 		usersArea.setBorder(BorderFactory.createLineBorder(Color.black));
 		usersOnline = windowManager.contactsManager.getUsersOnline();
-		for (int i = 0;i<usersOnline.size();i++) {
+		for (int i = 0; i < usersOnline.size(); i++) {
 			usersArea.append(user.getName());
 		}
 		c.fill = GridBagConstraints.HORIZONTAL;
