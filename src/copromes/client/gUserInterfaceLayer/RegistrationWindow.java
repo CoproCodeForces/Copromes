@@ -43,6 +43,8 @@ public class RegistrationWindow extends JFrame implements ActionListener {
 		setBackground(new Color(255, 255, 255));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		RegisterButtonListner registerButtonListner = new RegisterButtonListner();
+		CancelButtonListner cancelButtonListner = new CancelButtonListner();
 
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -148,7 +150,7 @@ public class RegistrationWindow extends JFrame implements ActionListener {
 		panel.add(bioInput, c);
 
 		registerButton = new JButton("FREE REGISTRATION");
-		registerButton.addActionListener(this);
+		registerButton.addActionListener(registerButtonListner);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(10, 95, 0, -95);
 		c.gridx = 0;
@@ -158,7 +160,7 @@ public class RegistrationWindow extends JFrame implements ActionListener {
 		panel.add(registerButton, c);
 
 		JButton cancelButton = new JButton("CANCEL");
-		cancelButton.addActionListener(this);
+		cancelButton.addActionListener(cancelButtonListner);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(10, 95, 0, -95);
 		c.gridx = 0;
@@ -173,10 +175,10 @@ public class RegistrationWindow extends JFrame implements ActionListener {
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object eventSource = e.getSource();
-		if (eventSource == registerButton) {
+	class RegisterButtonListner implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
 			try {
 				User user = windowManager.authManager.registerUser(
 						loginInput.getText(), passwordInput.getPassword(),
@@ -187,12 +189,20 @@ public class RegistrationWindow extends JFrame implements ActionListener {
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			} catch (InvalidRegistrationException e1) {
-				
+
 			}
+
 		}
-		else {
+
+	}
+
+	class CancelButtonListner implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
 			dispose();
 			LoginWindow loginWindow = new LoginWindow(windowManager);
+
 		}
 
 	}

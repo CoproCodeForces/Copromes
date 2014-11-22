@@ -6,7 +6,14 @@ import java.awt.GridBagLayout;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.rmi.RemoteException;
+import java.util.List;
 
+import javafx.scene.input.KeyCode;
+
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,35 +21,33 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
 
-public class ChatWindow extends JFrame implements ActionListener {
+public class ChatWindow extends JFrame {
 
 	private WindowManager windowManager;
-	
+
 	private User user;
 	private ChatRoom chatRoom;
-	
+	private List<User> usersOnline;
+
 	private JTextArea chatArea;
 	private JScrollPane scrollPane;
 	private JTextArea usersArea;
 	private JTextField messageInput;
 	private JButton sendMessageButton;
 
-//	public ChatWindow(WindowManager windowManager, User user) {
-//		this.windowManager = windowManager;
-//		this.user = user;
-//		initUI();
-//	}
-	
-	public ChatWindow () {
+	public ChatWindow(WindowManager windowManager, User user) {
+		this.windowManager = windowManager;
+		this.user = user;
 		initUI();
 	}
 
-	private void initUI() {
+	private void initUI() throws RemoteException {
 		setTitle("CHAT");
 		setSize(1337, 1488);
 		setBackground(new Color(255, 255, 255));
@@ -70,6 +75,10 @@ public class ChatWindow extends JFrame implements ActionListener {
 		JPanel panel2 = new JPanel();
 		usersArea = new JTextArea(30, 15);
 		usersArea.setBorder(BorderFactory.createLineBorder(Color.black));
+		usersOnline = windowManager.contactsManager.getUsersOnline();
+		for (int i = 0;i<usersOnline.size();i++) {
+			usersArea.append(user.getName());
+		}
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 0;
@@ -88,9 +97,10 @@ public class ChatWindow extends JFrame implements ActionListener {
 		c.gridwidth = 1;
 		panel3.add(messageInput);
 		panel.add(panel3, c);
-
+		TextInputListener textInputListener = new TextInputListener();
 		sendMessageButton = new JButton("Send Message");
-		sendMessageButton.addActionListener(this);
+		sendMessageButton.addActionListener(textInputListener);
+		messageInput.addActionListener(textInputListener);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -102,28 +112,25 @@ public class ChatWindow extends JFrame implements ActionListener {
 		pack();
 		setVisible(true);
 	}
-	
-	public void printMessage(Message message){
+
+	public void printMessage(Message message) {
 		System.out.println("13235");
-		chatArea.append(message.toString());		
+		chatArea.append(message.toString());
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object eventSource = e.getSource();
-		if (eventSource == sendMessageButton) {
+	class TextInputListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
 			try {
 				System.out.print("lol");
-				windowManager.messengerManager.sendMessage(user, messageInput.getText(), chatRoom);
+				windowManager.messengerManager.sendMessage(user,
+						messageInput.getText(), chatRoom);
 				System.out.print("lol2");
 				messageInput.setText(null);
-				
-			}
-			catch (Exception e1)
-			{
-				
+
+			} catch (Exception e1) {
+
 			}
 		}
-
 	}
 }
