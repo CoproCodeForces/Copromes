@@ -75,7 +75,7 @@ public class ChatWindow extends JFrame {
 		usersArea = new JTextArea(30, 15);
 		usersArea.setBorder(BorderFactory.createLineBorder(Color.black));
 		usersOnline = windowManager.contactsManager.getUsersOnline();
-		for (int i = 0;i<usersOnline.size();i++) {
+		for (int i = 0; i < usersOnline.size(); i++) {
 			usersArea.append(user.getName());
 		}
 		c.fill = GridBagConstraints.HORIZONTAL;
