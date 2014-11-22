@@ -73,15 +73,16 @@ final class ClientChecker implements Runnable {
 	public void run() {
 		try {
 			while (3 < 5) {
+                            Thread.sleep(5000);
 				for (Client client : clients) {
 					try {
 						client.client.isConnected();
 					} catch (Exception e) {
-                                                System.out.println("[server] "+client.user.getName() + "disconected");
+                                                System.out.println("[server] "+client.user.getName() + " disconected");
 						clients.remove(client);
 					}
 				}
-				Thread.sleep(10000);
+				
 			}
 		} catch (InterruptedException ex) {
 			System.err.println("ClientChecker error");

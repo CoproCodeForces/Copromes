@@ -60,10 +60,11 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 
 	@Override
 	public User registerUser(String login, String passwordHash,
-			String passwordConfirmationHash, String name, String Bio)
+			String passwordConfirmationHash, String name, String Bio, String email)
 			throws InvalidRegistrationException {
-		// TODO Auto-generated method stub
-		return null;
+		User user = dbManager.registerUser(login, passwordHash, passwordConfirmationHash, name, Bio, email);
+                
+		return user;
 	}
 
 }

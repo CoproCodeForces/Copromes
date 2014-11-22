@@ -11,6 +11,6 @@ public interface IAuthorizationManager extends Remote {
 	void doLogout(User user) throws RemoteException;
 
 	User registerUser(String login, String passwordHash,
-			String passwordConfirmationHash, String name, String Bio)
+			String passwordConfirmationHash, String name, String Bio, String email)
 			throws RemoteException, InvalidRegistrationException;
 }

@@ -10,7 +10,7 @@ package copromes.server.databaseService;
  * @author baski
  */
 public interface IDatabaseConstance {
-    final static String insertUser              = "INSERT INTO user VALUES( default, ?, ?, ?, ?, ?, ?);";
+    final static String insertUser              = "INSERT INTO user VALUES( default, ?, ?, ?, CURDATE(), CURDATE(), ?, ?);";
     final static String insertCgatRoom          = "INSERT INTO chatroom VALUES ( ?, ?);";
     final static String inserContact            = "INSERT INTO contact VALUES ( ?, ?);";
     final static String insertMessage           = "INSER INTO message VALUE ( ?, ?, ?, ?);";
