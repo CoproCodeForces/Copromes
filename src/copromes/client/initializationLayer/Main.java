@@ -40,6 +40,7 @@ public class Main {
 //			windowManager.start();
 			ChatWindow chatWindow = new ChatWindow();
 		} catch (Exception e) {
+			e.printStackTrace();
 			windowManager.showError(e.getMessage());
 		}
 	}

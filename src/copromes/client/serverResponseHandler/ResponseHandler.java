@@ -6,7 +6,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Observable;
 
-import javafx.beans.InvalidationListener;
 import copromes.client.gUserInterfaceLayer.WindowManager;
 import copromes.client.networkLayer.ServerResponseHost;
 import copromes.commonInterfaces.IServerResponseManager;

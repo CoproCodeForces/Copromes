@@ -15,16 +15,14 @@ import copromes.server.messengerService.MessengerManager;
 public class Server {
 
 	private Registry registry;
-	private int port;	
+	private int port;
 	public List<Client> clients;
-	
-	
+
 	public Server(int port) throws RemoteException {
 		this.port = port;
 		registry = LocateRegistry.createRegistry(port);
 		clients = new ArrayList<Client>();
-		new Thread(new ClientChecker(clients)).run();
-                
+		new Thread(new ClientChecker(clients)).start();
 
 	}
 
@@ -38,7 +36,7 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setupContactsManager(ContactsManager contactsManager) {
 		try {
 			IContactsManager contactsStub = (IContactsManager) UnicastRemoteObject
@@ -49,7 +47,7 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setupMessengerManager(MessengerManager messengerManager) {
 		try {
 			IMessengerManager messengerStub = (IMessengerManager) UnicastRemoteObject
@@ -65,29 +63,27 @@ public class Server {
 final class ClientChecker implements Runnable {
 
 	private List<Client> clients;
-	
+
 	public ClientChecker(List<Client> clients) {
 		this.clients = clients;
 	}
-	
+
 	@Override
 	public void run() {
-            try{
-            while(3<5)
-            {
-		for (Client client : clients) {
-			try {
-				client.client.isConnected();
-			} catch (RemoteException e) {
-				clients.remove(client);
+		try {
+			while (3 < 5) {
+				for (Client client : clients) {
+					try {
+						client.client.isConnected();
+					} catch (RemoteException e) {
+						clients.remove(client);
+					}
+				}
+				Thread.sleep(10000);
 			}
+		} catch (InterruptedException ex) {
+			System.err.println("ClientChecker error");
 		}
-                Thread.sleep(10000);
-            }
-            }catch(InterruptedException ex)
-                    {
-                        System.err.println("ClientChecker error");
-                    }
 	}
-	
+
 }
