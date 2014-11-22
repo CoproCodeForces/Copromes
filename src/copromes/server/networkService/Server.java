@@ -6,6 +6,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import copromes.commonInterfaces.*;
 import copromes.server.authorizationService.AuthorizationManager;
@@ -21,7 +22,7 @@ public class Server {
 	public Server(int port) throws RemoteException {
 		this.port = port;
 		registry = LocateRegistry.createRegistry(port);
-		clients = new ArrayList<Client>();
+		clients = new CopyOnWriteArrayList<Client>();
 		new Thread(new ClientChecker(clients)).start();
 
 	}
