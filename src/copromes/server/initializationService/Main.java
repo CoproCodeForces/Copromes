@@ -12,17 +12,18 @@ import copromes.server.networkService.Server;
 
 public class Main {
 
-	private final static int port = 8814;
+	private final static int port = 1488;
 	
 	public static void main(String[] args) {
 		try {
 			Server server = new Server(port);			
-			
+                        System.out.println("Starting server");
 			DatabaseManager dbManager = new DatabaseManager();			
 			AuthorizationManager authorizationManager = new AuthorizationManager(server, dbManager);			
 			ContactsManager contactsManager = new ContactsManager(server, dbManager);			
 			MessengerManager messengerManager = new MessengerManager(server, dbManager);						
-			
+                        System.out.println("Server started");
+                        
 		} catch (RemoteException e) {
 
 			e.printStackTrace();

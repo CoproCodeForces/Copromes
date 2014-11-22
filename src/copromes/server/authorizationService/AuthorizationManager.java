@@ -15,9 +15,7 @@ import copromes.server.networkService.Server;
 
 public class AuthorizationManager extends RemoteServer implements IAuthorizationManager {
 
-	/**
-	 * 
-	 */
+	
 	private Server server;
 	private DatabaseManager dbManager;
 	
