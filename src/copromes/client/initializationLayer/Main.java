@@ -12,8 +12,8 @@ import copromes.domainLayer.User;
 public class Main {
 
 	private final static int serverPort = 1488;
-	private final static int clientPort = 13337;
-	private final static String host = "192.168.43.144";
+	private final static int clientPort = 13377;
+	private final static String host = "192.168.1.52";
 
 	public static void main(String[] args) {
 
