@@ -7,6 +7,7 @@ import copromes.client.messengerLayer.Messenger;
 import copromes.client.networkLayer.Server;
 import copromes.client.networkLayer.ServerResponseHost;
 import copromes.client.serverResponseHandler.ResponseHandler;
+import copromes.domainLayer.User;
 
 public class Main {
 
@@ -19,26 +20,25 @@ public class Main {
 		WindowManager windowManager = new WindowManager();
 
 		try {
-//			// Initializing access to server host
-//			Server server = new Server(serverPort, host);
-//			// Accessing server remote interfaces
-//			server.setInterfaces();
-//
-//			// Initializing local managers for GUI events handling
-//			AuthorizationManager authManager = new AuthorizationManager(server);
-//			ContactsManager contactsManager = new ContactsManager(server);
-//			Messenger messenger = new Messenger(server);
-//			// Initializing local manager for server event handling
-//			ResponseHandler responseHandler = new ResponseHandler();
-//			ServerResponseHost serverResponseHost = new ServerResponseHost(
-//					responseHandler, clientPort);
-//			serverResponseHost.setupClientHost();
-//			// Initializing GUI;
-//			windowManager = new WindowManager(messenger, authManager,
-//					contactsManager, responseHandler);
-//
-//			windowManager.start();
-			ChatWindow chatWindow = new ChatWindow();
+			// Initializing access to server host
+			Server server = new Server(serverPort, host);
+			// Accessing server remote interfaces
+			server.setInterfaces();
+
+			// Initializing local managers for GUI events handling
+			AuthorizationManager authManager = new AuthorizationManager(server);
+			ContactsManager contactsManager = new ContactsManager(server);
+			Messenger messenger = new Messenger(server);
+			// Initializing local manager for server event handling
+			ResponseHandler responseHandler = new ResponseHandler();
+			ServerResponseHost serverResponseHost = new ServerResponseHost(
+					responseHandler, clientPort);
+			serverResponseHost.setupClientHost();
+			// Initializing GUI;
+			windowManager = new WindowManager(messenger, authManager,
+					contactsManager, responseHandler);
+
+			windowManager.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 			windowManager.showError(e.getMessage());
