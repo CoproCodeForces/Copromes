@@ -8,9 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 import java.util.List;
-
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -52,7 +54,20 @@ public class ChatWindow extends JFrame {
 		setBackground(new Color(255, 255, 255));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					windowManager.authManager.doLogout(user);
+				} catch (RemoteException e1) {
+					
+				}
+				System.exit(0);
+			}
+		});
+		
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 

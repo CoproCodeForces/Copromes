@@ -24,7 +24,6 @@ public class Server {
 		registry = LocateRegistry.createRegistry(port);
 		clients = new CopyOnWriteArrayList<Client>();
 		new Thread(new ClientChecker(clients)).start();
-
 	}
 
 	public void setupAuthManager(AuthorizationManager authManager) {
