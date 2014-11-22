@@ -42,6 +42,8 @@ public class AuthorizationManager extends RemoteServer implements IAuthorization
 		} catch (ServerNotActiveException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
