@@ -15,6 +15,7 @@ public class User implements Serializable {
 	private String name;
 	private String bio; // TODO add in database 
 	private List<ChatRoom> chatRooms;
+	private List<User> friends;
 	private Date registrationDate;
 	private Date lastSeenDate;
 	
@@ -26,6 +27,7 @@ public class User implements Serializable {
 		this.bio = bio;
 		
 		chatRooms = new ArrayList<ChatRoom>();
+		friends = new ArrayList<User>();
 		registrationDate = new Date();
 		lastSeenDate = registrationDate;
 	}
@@ -52,6 +54,10 @@ public class User implements Serializable {
 	
 	public List<ChatRoom> getChatRooms() {
 		return chatRooms;
+	}
+	
+	public List<User> getFriends() {
+		return friends;
 	}
 	
 	public void setLastSeenDate(Date date) {

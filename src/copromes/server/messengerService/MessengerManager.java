@@ -64,7 +64,9 @@ public class MessengerManager implements IMessengerManager {
 		dbManager.addUserToChatRoom(user, chatRoom);
 		for (Client client : server.clients) {
 			try {
-				client.client.updateChatRoom(chatRoom);
+				if (chatRoom.getUsers().contains(client.user)) {
+					client.client.updateChatRoom(chatRoom);
+				}
 			} catch (RemoteException e) {
 				server.clients.remove(client);
 			}
