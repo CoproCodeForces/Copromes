@@ -10,6 +10,7 @@ package copromes.server.databaseService;
  * @author baski
  */
 public interface IDatabaseConstance {
+    
     final static String insertUser              = "INSERT INTO user VALUES( default, ?, ?, ?, CURDATE(), CURDATE(), ?, ?);";
     final static String insertCgatRoom          = "INSERT INTO chatroom VALUES ( ?, ?);";
     final static String insertContact           = "INSERT INTO contact VALUES ( ?, ?);";
@@ -22,5 +23,5 @@ public interface IDatabaseConstance {
     final static String deleteUserFromChatroom  = "DELETE FOROM user_to_chat WHERE user_id = ? and chatroom_id = ?;";
     final static String deleteContact           = "DELETE FROM TABLE contact WHERE user_id = ? and contact_id = ?;"; 
     final static String deleteChatRoom          = "DELETE FROM chatroom WHERE chatroom_id = ?;";
-    
+    final static String updateLastSign          = "UPDATE user SET last_sign = sysdate() where login = ?;";
 }

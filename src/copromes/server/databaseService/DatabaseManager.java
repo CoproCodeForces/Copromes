@@ -216,8 +216,40 @@ public class DatabaseManager implements IDatabaseConstance {
     public void doLogout(User user) {
 		// Some database related code
         // SELECT INSERT UPDATE WHERE
-
-        user.setLastSeenDate(new Date());
+       // user.setLastSeenDate(new Date());
+        
+        PreparedStatement update = null;
+        
+        try{
+            update = con.prepareStatement(updateLastSign);
+            update.setString(1, user.getLogin());
+            update.executeUpdate();
+            con.commit();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (con != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                } catch (SQLException excep) {
+                       excep.printStackTrace();
+                }
+            }
+        } finally {
+            if (update != null) {
+                try {
+                    update.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public User registerUser(String login, String passwordHash,
