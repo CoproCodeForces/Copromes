@@ -17,7 +17,10 @@ public class ChatRoom {
 		creationDate = new Date();
 		users = new ArrayList<User>();
 	}
-	
+	public int getId(){
+                return id;
+        }
+        
 	public String getName() {
 		return name;
 	}

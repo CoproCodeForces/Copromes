@@ -31,7 +31,11 @@ public class User implements Serializable {
 		registrationDate = new Date();
 		lastSeenDate = registrationDate;
 	}
-	
+        
+        public int getId(){
+                return id;
+        }
+        
 	public String getLogin() {
 		return login;
 	}
@@ -63,4 +67,5 @@ public class User implements Serializable {
 	public void setLastSeenDate(Date date) {
 		lastSeenDate = date;
 	}
+
 }

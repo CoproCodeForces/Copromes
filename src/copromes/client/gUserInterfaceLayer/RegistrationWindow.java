@@ -31,7 +31,8 @@ public class RegistrationWindow extends JFrame {
 	private JPasswordField passwordConfirmInput;
 	private JButton loginButton;
 	private JButton registerButton;
-
+        
+        
 	public RegistrationWindow(WindowManager windowManager) {
 		this.windowManager = windowManager;
 		initUI();

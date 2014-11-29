@@ -28,11 +28,11 @@ public class AuthorizationManager {
 	}
 
 	public User registerUser(String login, char[] passwordHash,
-			char[] passwordConfirmationHash, String name, String Bio)
+			char[] passwordConfirmationHash, String name, String Bio, String email)
 			throws InvalidRegistrationException, RemoteException {
 		return server.authManager.registerUser(login,
 				String.valueOf(passwordHash),
-				String.valueOf(passwordConfirmationHash), name, Bio);
+				String.valueOf(passwordConfirmationHash), name, Bio, email);
 	}
 
 }
