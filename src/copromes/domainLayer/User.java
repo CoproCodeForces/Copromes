@@ -11,7 +11,8 @@ public class User implements Serializable {
 
 	private int id;
 	private String login;
-	private String password;
+        //Maby it is not so secure to store password here
+	//private String password;
 	private String name;
 	private String bio; // TODO add in database 
 	private List<ChatRoom> chatRooms;
@@ -19,10 +20,10 @@ public class User implements Serializable {
 	private Date registrationDate;
 	private Date lastSeenDate;
 	
-	public User (int id, String login, String password, String name, String bio) {
+	public User (int id, String login, String name, String bio) {
 		this.id = id;
 		this.login = login;
-		this.password = password;
+          //      this.password = password;
 		this.name = name;
 		this.bio = bio;
 		

@@ -19,8 +19,8 @@ public interface IDatabaseConstance {
     final static String selectByEmailPswd       = "SELECT COUNT(*), * FROM user WHERE email= ? and password = ?;";
     final static String selectByName            = "SELECT COUNT(*), * FROM user WHERE name = ?;";
     final static String GetUserId               = "SELECT COUNT(user_id), user_id FROM  user WHERE login = ?;";
-    final static String deleteUserFromChatroom  = "DELETE FOROM user_to_chat WHERE user_id = ?;";
-    final static String deleteContact           = "DELETE FROM TABLE contact WHERE user_id = ?;"; 
+    final static String deleteUserFromChatroom  = "DELETE FOROM user_to_chat WHERE user_id = ? and chatroom_id = ?;";
+    final static String deleteContact           = "DELETE FROM TABLE contact WHERE user_id = ? and contact_id = ?;"; 
     final static String deleteChatRoom          = "DELETE FROM chatroom WHERE chatroom_id = ?;";
     
 }

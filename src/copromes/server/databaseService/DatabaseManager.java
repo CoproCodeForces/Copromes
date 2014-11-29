@@ -9,6 +9,7 @@ import copromes.commonInterfaces.InvalidRegistrationException;
 import copromes.domainLayer.ChatRoom;
 import copromes.domainLayer.Message;
 import copromes.domainLayer.User;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,25 +28,128 @@ public class DatabaseManager implements IDatabaseConstance {
 
     }
 
+    //TODO: regularize exceptions throwing of all methods
+    
     public void addFriend(User user, User friend) {
         
-//        PreparedStatement addFriend = null;
-//        try{
-//            addFriend = con.prepareStatement(insertContact);
-//            addFriend.setInt(1, user.getId());
-//            addFriend.setInt(2, friend.getId());
-//        }
+        PreparedStatement addFriend = null;
+        try{
+            addFriend = con.prepareStatement(insertContact);
+            addFriend.setInt(1, user.getId());
+            addFriend.setInt(2, friend.getId());
+            addFriend.executeUpdate();
+            con.commit();
+        
+        }catch (SQLException e) {
+            e.printStackTrace();
+            if (con != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                } catch (SQLException excep) {
+                       excep.printStackTrace();
+                }
+            }
+        } finally {
+            if (addFriend != null) {
+                try {
+                    addFriend.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
 
     }
 
-    public void deleteFriend(User friend) {
-        // TODO Auto-generated method stub
+    public void deleteFriend(User user, User friend) {
+        
+        PreparedStatement delFriend= null;
+        try{
+            delFriend = con.prepareStatement(deleteContact);
+            delFriend.setInt(1, user.getId());
+            delFriend.setInt(2,friend.getId());
+            delFriend.executeUpdate();
+            con.commit();
+            
+        }catch (SQLException e) {
+            e.printStackTrace();
+            if (con != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                } catch (SQLException excep) {
+                       excep.printStackTrace();
+                }
+            }
+        } finally {
+            if (delFriend != null) {
+                try {
+                    delFriend.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
 
     }
 
     public List<User> findUser(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        PreparedStatement findUsr = null;
+        List<User> lusr = new ArrayList<User>();
+        User usr = null;
+        
+        try{
+            findUsr = con.prepareStatement(selectByName);
+            findUsr.setString(1, name);
+            ResultSet rs = findUsr.executeQuery();
+            con.commit();
+            
+            while (rs.next()) {                
+                usr = new User(rs.getInt("user_id"), rs.getString("login"), rs.getString("name"), rs.getString("bio"));
+                lusr.add(usr);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (con != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    con.rollback();
+                } catch (SQLException excep) {
+                       excep.printStackTrace();
+                }
+            }
+        } finally {
+            if (findUsr != null) {
+                try {
+                    findUsr.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                con.setAutoCommit(true);
+                } catch (SQLException ex) {
+                Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } 
+        
+        return lusr;
     }
 
     public User doLogin(String loginOremail, String passwordHash)
@@ -75,7 +179,6 @@ public class DatabaseManager implements IDatabaseConstance {
             if(rs.getInt(1)>1) throw new InvalidLoginException("have been found few profiles with equal logins/emails");
             usr = new User(rs.getInt("user_id"),
                                 rs.getString("login"),
-                                rs.getString("password"),
                                 rs.getString("name"),
                                 rs.getString("bio")
                                 );
@@ -101,7 +204,7 @@ public class DatabaseManager implements IDatabaseConstance {
             }
             try {
                 con.setAutoCommit(true);
-            } catch (SQLException ex) {
+                } catch (SQLException ex) {
                 Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -142,7 +245,7 @@ public class DatabaseManager implements IDatabaseConstance {
             con.commit();
             
             
-            usr = new User(rs.getInt("user_id"), login, passwordHash, name, Bio);
+            usr = new User(rs.getInt("user_id"), login, name, Bio);
             
         } catch (SQLException e) {
             e.printStackTrace();
